@@ -18,7 +18,7 @@ public class SignUpFrame extends JFrame {
         setLocationRelativeTo(null);
 
         signUp = new SignUpPanel(this);
-        add(signUp.getRegisterPanel());
+        add(signUp.getSignUpPanel());
 
         setVisible(true);
 

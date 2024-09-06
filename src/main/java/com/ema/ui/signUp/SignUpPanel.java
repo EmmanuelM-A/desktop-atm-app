@@ -53,7 +53,7 @@ public class SignUpPanel {
         
     }
 
-    public JPanel getRegisterPanel() {
+    public JPanel getSignUpPanel() {
         return this.signUpPanel;
     }
 
