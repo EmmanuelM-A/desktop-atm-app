@@ -10,22 +10,22 @@ import java.awt.event.ActionListener;
 
 public class SignUpPanel {
     private final CardLayout cardLayout;
-    private final JPanel registerPanel;
+    private final JPanel signUpPanel;
     private final PersonalDetialsPage personalDetialsPage;
     private final AccountDetailsPage accountDetailsPage;
 
     public SignUpPanel(JFrame frame) {
         this.cardLayout = new CardLayout();
-        this.registerPanel = new JPanel(cardLayout);
+        this.signUpPanel = new JPanel(cardLayout);
         this.personalDetialsPage = new PersonalDetialsPage(frame);
         this.accountDetailsPage = new AccountDetailsPage(frame);
 
-        registerPanel.add(personalDetialsPage.getPersonalDetailsPanel(), "Personal detials");
-        registerPanel.add(accountDetailsPage.getAccountDetailsPanel(), "Account detials");
+        signUpPanel.add(personalDetialsPage.getPersonalDetailsPanel(), "Personal detials");
+        signUpPanel.add(accountDetailsPage.getAccountDetailsPanel(), "Account detials");
 
         SignUpLogic signUpLogic = new SignUpLogic();
 
-        cardLayout.show(registerPanel, "Personal details");
+        cardLayout.show(signUpPanel, "Personal details");
 
         personalDetialsPage.getNextBtn().addActionListener(new ActionListener() {
             @Override
@@ -37,7 +37,7 @@ public class SignUpPanel {
                     signUpLogic.validateAddress(personalDetialsPage.getAddressInput().getText()) && 
                     signUpLogic.validatePhoneNumber(personalDetialsPage.getPhoneNumberInput().getText())
                     ) {*/
-                        cardLayout.show(registerPanel, "Account detials");
+                        cardLayout.show(signUpPanel, "Account detials");
                         accountDetailsPage.setAccountName(createAccountName());
                         accountDetailsPage.getAccountNameLabel().setText("Your account name: " + accountDetailsPage.getAccountName());
                 //}                
@@ -47,14 +47,14 @@ public class SignUpPanel {
         accountDetailsPage.getPrevBtn().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(registerPanel, "Personal detials");
+                cardLayout.show(signUpPanel, "Personal detials");
             }
         });
         
     }
 
     public JPanel getRegisterPanel() {
-        return this.registerPanel;
+        return this.signUpPanel;
     }
 
     public PersonalDetialsPage getPersonalDetialsPage() {

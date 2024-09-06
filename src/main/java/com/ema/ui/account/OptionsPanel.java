@@ -1,13 +1,17 @@
 package com.ema.ui.account;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.ema.ui.account.options.withdraw.WithdrawPage;
 
 public class OptionsPanel {
     private final JPanel optionsPanel;
@@ -32,6 +36,12 @@ public class OptionsPanel {
 
     private final JButton exitBtn;
 
+    private CardLayout cardLayout;
+
+    // Option Panels
+
+    private WithdrawPage withdrawPage;
+
     public static OptionsPanel instance;
 
     public OptionsPanel() {
@@ -48,10 +58,24 @@ public class OptionsPanel {
         this.changePinBtn = formattedButton("Change Pin", 13, null);
         this.viewAccountBtn = formattedButton("View Account", 13, null);
         this.exitBtn = formattedButton("Exit", 13, null);
+
+        cardLayout = new CardLayout();
         
-        optionsPanel.setLayout(null);
+        optionsPanel.setLayout(cardLayout);
         optionsPanel.setPreferredSize(new Dimension(900, 700));
         optionsPanel.setBackground(Color.CYAN);
+
+        withdrawPage = new WithdrawPage();
+
+        optionsPanel.add(withdrawPage.getWithdrawPage(), "Withdraw Page");
+
+        withdrawBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(optionsPanel, "Withdraw Page");
+                System.out.println("Moved to Withdraw Page");
+            }
+        });
 
         int width = 140;
         int height = 40;
@@ -81,6 +105,8 @@ public class OptionsPanel {
         optionsPanel.add(viewAccountBtn);
 
         optionsPanel.add(exitBtn);
+
+        //cardLayout.show()
 
         instance = this;
     }
