@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.ema.actions.GoToWidthdrawPage;
+
 public class OptionsPage {
     private final JPanel optionsPage;
 
@@ -35,7 +37,7 @@ public class OptionsPage {
     public OptionsPage() {
         this.optionsPage = new JPanel();
         this.header = new JLabel("Select an option from below");
-        this.withdrawBtn = formattedButton("Withdraw", 13, null);
+        this.withdrawBtn = formattedButton("Withdraw", 13, new GoToWidthdrawPage());
         this.depositBtn = formattedButton("Deposit", 13, null);
         this.transferBtn = formattedButton("Transfer", 13, null);
         this.paymentBtn = formattedButton("Payment", 13, null);
@@ -123,6 +125,8 @@ public class OptionsPage {
         JButton button = new JButton(title);
 
         button.setFont(new Font("Cambria", Font.BOLD, size));
+
+        button.addActionListener(listener);
 
         return button;
     }

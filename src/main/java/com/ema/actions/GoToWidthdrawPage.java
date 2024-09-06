@@ -1,11 +1,28 @@
 package com.ema.actions;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JPanel;
+
+import com.ema.ui.account.OptionsPanel;
+
+/**
+ * This class listens for an action and, when triggered, switches from the options page to the withdraw page.
+ */
 public class GoToWidthdrawPage implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        // Gets the parent container's layout
+        CardLayout cardLayout = OptionsPanel.getInstance().getLayout();
+
+        // Gets the parent panel
+        JPanel optionsPanel = OptionsPanel.getInstance().getOptionsPanel();
+
+        // Switches to the withdraw page
+        cardLayout.show(optionsPanel, "Withdraw Page");
+
+        System.out.println("Clicked");
     }   
 }

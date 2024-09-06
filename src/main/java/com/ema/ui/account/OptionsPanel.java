@@ -1,14 +1,6 @@
 package com.ema.ui.account;
 
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.ema.ui.account.options.OptionsPage;
@@ -39,9 +31,9 @@ public class OptionsPanel {
     private final WithdrawPage withdrawPage;
 
     /**
-     * An instance of the options panel which sould be used as a reference to this class.
+     * An instance of the options panel which should be used as a reference to this class.
      */
-    public static OptionsPanel instance;
+    private static OptionsPanel instance;
 
     public OptionsPanel() {
         this.cardLayout = new CardLayout();
@@ -58,5 +50,22 @@ public class OptionsPanel {
 
     public JPanel getOptionsPanel() {
         return this.optionsPanel;
+    }
+
+    public CardLayout getLayout() {
+        return this.cardLayout;
+    }
+
+    public WithdrawPage getWithdrawPage() {
+        return this.withdrawPage;
+    }
+
+    public static OptionsPanel getInstance() {
+        if(instance == null) {
+            System.out.println("");
+            instance = new OptionsPanel();
+        }
+
+        return instance;
     }
 }
