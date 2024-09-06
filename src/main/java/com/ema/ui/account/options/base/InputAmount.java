@@ -1,4 +1,4 @@
-package com.ema.ui.account.options.withdraw;
+package com.ema.ui.account.options.base;
 
 import java.awt.Color;
 
