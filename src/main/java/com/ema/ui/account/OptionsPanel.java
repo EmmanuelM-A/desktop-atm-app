@@ -30,11 +30,17 @@ public class OptionsPanel {
      */
     private final WithdrawPage withdrawPage;
 
+    private final De
+
     /**
      * An instance of the options panel which should be used as a reference to this class.
      */
     public static OptionsPanel instance;
 
+    /**
+     * The constructor setups the UI with the options page as default and different pages
+     * as selections. The pages are managed with the CardLayout layout. 
+     */
     public OptionsPanel() {
         this.cardLayout = new CardLayout();
         this.optionsPanel = new JPanel(cardLayout);

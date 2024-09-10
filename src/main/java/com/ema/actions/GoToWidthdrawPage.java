@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import com.ema.ui.account.OptionsPanel;
 
 /**
- * This class listens for an action and, when triggered, switches from the options page to the withdraw page.
+ * This class listens for an action and when triggered, switches from the options page to the withdraw page.
  */
 public class GoToWidthdrawPage implements ActionListener {
     @Override
