@@ -33,7 +33,7 @@ public class OptionsPanel {
     /**
      * An instance of the options panel which should be used as a reference to this class.
      */
-    private static OptionsPanel instance;
+    public static OptionsPanel instance;
 
     public OptionsPanel() {
         this.cardLayout = new CardLayout();
@@ -46,6 +46,8 @@ public class OptionsPanel {
         optionsPanel.add(withdrawPage.getWithdrawPage(), "Withdraw Page");
         
         cardLayout.show(optionsPanel, "Options Page");
+
+        instance = this;
     }
 
     public JPanel getOptionsPanel() {
@@ -58,14 +60,5 @@ public class OptionsPanel {
 
     public WithdrawPage getWithdrawPage() {
         return this.withdrawPage;
-    }
-
-    public static OptionsPanel getInstance() {
-        if(instance == null) {
-            System.out.println("");
-            instance = new OptionsPanel();
-        }
-
-        return instance;
     }
 }

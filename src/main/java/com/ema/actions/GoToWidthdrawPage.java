@@ -15,14 +15,12 @@ public class GoToWidthdrawPage implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // Gets the parent container's layout
-        CardLayout cardLayout = OptionsPanel.getInstance().getLayout();
+        CardLayout cardLayout = OptionsPanel.instance.getLayout();
 
         // Gets the parent panel
-        JPanel optionsPanel = OptionsPanel.getInstance().getOptionsPanel();
+        JPanel optionsPanel = OptionsPanel.instance.getOptionsPanel();
 
         // Switches to the withdraw page
         cardLayout.show(optionsPanel, "Withdraw Page");
-
-        System.out.println("Clicked");
     }   
 }
