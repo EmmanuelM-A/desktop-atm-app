@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.ema.actions.GoToDepositPage;
+import com.ema.actions.GoToTransferPage;
 import com.ema.actions.GoToWidthdrawPage;
 
 public class OptionsPage {
@@ -38,14 +40,14 @@ public class OptionsPage {
         this.optionsPanel = new JPanel();
         this.header = new JLabel("Select an option from below");
         this.withdrawBtn = formattedButton("Withdraw", 13, new GoToWidthdrawPage());
-        this.depositBtn = formattedButton("Deposit", 13, null);
-        this.transferBtn = formattedButton("Transfer", 13, null);
-        this.paymentBtn = formattedButton("Payment", 13, null);
-        this.checkBalanceBtn = formattedButton("Check Balance", 13, null);
-        this.transactionsBtn = formattedButton("Transaction History", 13, null);
-        this.changePinBtn = formattedButton("Change Pin", 13, null);
-        this.viewAccountBtn = formattedButton("View Account", 13, null);
-        this.exitBtn = formattedButton("Exit", 13, null);
+        this.depositBtn = formattedButton("Deposit", 13, new GoToDepositPage());
+        this.transferBtn = formattedButton("Transfer", 13, new GoToTransferPage());
+        this.paymentBtn = formattedButton("Payment", 13, new GoToPaymentPage());
+        this.checkBalanceBtn = formattedButton("Check Balance", 13, new GoToCheckBalance());
+        this.transactionsBtn = formattedButton("Transaction History", 13, new GoToTransactionsPage());
+        this.changePinBtn = formattedButton("Change Pin", 13, new GoToChangePinPage());
+        this.viewAccountBtn = formattedButton("View Account", 13, new GoToAccountPage());
+        this.exitBtn = formattedButton("Exit", 13, new GoToOptionsPage());
         
         optionsPanel.setLayout(null);
         optionsPanel.setPreferredSize(new Dimension(900, 700));
