@@ -6,18 +6,18 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 public class PaymentPage {
-    private JPanel paymentPage;
+    private JPanel paymentPanel;
 
     public PaymentPage() {
-        this.paymentPage = new JPanel();
+        this.paymentPanel = new JPanel();
 
-        paymentPage.setLayout(null);
+        paymentPanel.setLayout(null);
 
-        paymentPage.setBackground(Color.MAGENTA);
-        paymentPage.setPreferredSize(new Dimension(900, 700));
+        paymentPanel.setBackground(Color.MAGENTA);
+        paymentPanel.setPreferredSize(new Dimension(900, 700));
     }
 
-    public JPanel getWithdrawPage() {
-        return this.paymentPage;
+    public JPanel getPaymentPanel() {
+        return this.paymentPanel;
     }
 }

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import com.ema.actions.GoToWidthdrawPage;
 
 public class OptionsPage {
-    private final JPanel optionsPage;
+    private final JPanel optionsPanel;
 
     private final JLabel header;
 
@@ -35,7 +35,7 @@ public class OptionsPage {
     private final JButton exitBtn;
 
     public OptionsPage() {
-        this.optionsPage = new JPanel();
+        this.optionsPanel = new JPanel();
         this.header = new JLabel("Select an option from below");
         this.withdrawBtn = formattedButton("Withdraw", 13, new GoToWidthdrawPage());
         this.depositBtn = formattedButton("Deposit", 13, null);
@@ -47,9 +47,9 @@ public class OptionsPage {
         this.viewAccountBtn = formattedButton("View Account", 13, null);
         this.exitBtn = formattedButton("Exit", 13, null);
         
-        optionsPage.setLayout(null);
-        optionsPage.setPreferredSize(new Dimension(900, 700));
-        optionsPage.setBackground(Color.CYAN);
+        optionsPanel.setLayout(null);
+        optionsPanel.setPreferredSize(new Dimension(900, 700));
+        optionsPanel.setBackground(Color.CYAN);
 
         int width = 140;
         int height = 40;
@@ -67,22 +67,22 @@ public class OptionsPage {
 
         exitBtn.setBounds(50, 570, 100, 50);
 
-        optionsPage.add(header);
-        optionsPage.add(withdrawBtn);
-        optionsPage.add(depositBtn);
-        optionsPage.add(transferBtn);
-        optionsPage.add(paymentBtn);
+        optionsPanel.add(header);
+        optionsPanel.add(withdrawBtn);
+        optionsPanel.add(depositBtn);
+        optionsPanel.add(transferBtn);
+        optionsPanel.add(paymentBtn);
 
-        optionsPage.add(checkBalanceBtn);
-        optionsPage.add(transactionsBtn);
-        optionsPage.add(changePinBtn);
-        optionsPage.add(viewAccountBtn);
+        optionsPanel.add(checkBalanceBtn);
+        optionsPanel.add(transactionsBtn);
+        optionsPanel.add(changePinBtn);
+        optionsPanel.add(viewAccountBtn);
 
-        optionsPage.add(exitBtn);
+        optionsPanel.add(exitBtn);
     }
 
-    public JPanel getOptionsPage() {
-        return this.optionsPage;
+    public JPanel getOptionsPanel() {
+        return this.optionsPanel;
     }
 
     public JButton getWithdrawBtn() {

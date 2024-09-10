@@ -6,18 +6,18 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 public class WithdrawPage {
-    private JPanel withdrawPage;
+    private JPanel withdrawPanel;
 
     public WithdrawPage() {
-        this.withdrawPage = new JPanel();
+        this.withdrawPanel = new JPanel();
 
-        withdrawPage.setLayout(null);
+        withdrawPanel.setLayout(null);
 
-        withdrawPage.setBackground(Color.PINK);
-        withdrawPage.setPreferredSize(new Dimension(900, 700));
+        withdrawPanel.setBackground(Color.PINK);
+        withdrawPanel.setPreferredSize(new Dimension(900, 700));
     }
 
-    public JPanel getWithdrawPage() {
-        return this.withdrawPage;
+    public JPanel getWithdrawPanel() {
+        return this.withdrawPanel;
     }
 }

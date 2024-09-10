@@ -6,18 +6,18 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 public class ChangePinPage {
-    private JPanel changePinPage;
+    private JPanel changePinPanel;
 
     public ChangePinPage() {
-        this.changePinPage = new JPanel();
+        this.changePinPanel = new JPanel();
 
-        changePinPage.setLayout(null);
+        changePinPanel.setLayout(null);
 
-        changePinPage.setBackground(Color.BLACK);
-        changePinPage.setPreferredSize(new Dimension(900, 700));
+        changePinPanel.setBackground(Color.BLACK);
+        changePinPanel.setPreferredSize(new Dimension(900, 700));
     }
 
-    public JPanel getWithdrawPage() {
-        return this.changePinPage;
+    public JPanel getChangePinPanel() {
+        return this.changePinPanel;
     }
 }

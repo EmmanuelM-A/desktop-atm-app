@@ -6,18 +6,18 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 public class TransferPage {
-    private JPanel transferPage;
+    private JPanel transferPanel;
 
     public TransferPage() {
-        this.transferPage = new JPanel();
+        this.transferPanel = new JPanel();
 
-        transferPage.setLayout(null);
+        transferPanel.setLayout(null);
 
-        transferPage.setBackground(Color.GREEN);
-        transferPage.setPreferredSize(new Dimension(900, 700));
+        transferPanel.setBackground(Color.GREEN);
+        transferPanel.setPreferredSize(new Dimension(900, 700));
     }
 
-    public JPanel getWithdrawPage() {
-        return this.transferPage;
+    public JPanel getTransferPanel() {
+        return this.transferPanel;
     }
 }

@@ -6,18 +6,18 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 public class DepositPage {
-    private JPanel depositPage;
+    private JPanel depositPanel;
 
     public DepositPage() {
-        this.depositPage = new JPanel();
+        this.depositPanel = new JPanel();
 
-        depositPage.setLayout(null);
+        depositPanel.setLayout(null);
 
-        depositPage.setBackground(Color.BLUE);
-        depositPage.setPreferredSize(new Dimension(900, 700));
+        depositPanel.setBackground(Color.BLUE);
+        depositPanel.setPreferredSize(new Dimension(900, 700));
     }
 
-    public JPanel getWithdrawPage() {
-        return this.depositPage;
+    public JPanel getDepositPanel() {
+        return this.depositPanel;
     }
 }

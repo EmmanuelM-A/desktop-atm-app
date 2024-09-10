@@ -4,6 +4,13 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 import com.ema.ui.account.options.OptionsPage;
+import com.ema.ui.account.options.account.AccountPage;
+import com.ema.ui.account.options.balance.CheckBalancePage;
+import com.ema.ui.account.options.deposit.DepositPage;
+import com.ema.ui.account.options.payment.PaymentPage;
+import com.ema.ui.account.options.pin.ChangePinPage;
+import com.ema.ui.account.options.transactions.TransactionsPage;
+import com.ema.ui.account.options.transfer.TransferPage;
 import com.ema.ui.account.options.withdraw.WithdrawPage;
 
 /**
@@ -30,7 +37,19 @@ public class OptionsPanel {
      */
     private final WithdrawPage withdrawPage;
 
-    private final De
+    private final DepositPage depositPage;
+
+    private final PaymentPage paymentPage;
+
+    private final TransferPage transferPage;
+
+    private final CheckBalancePage checkBalancePage;
+
+    private final TransactionsPage transactionsPage;
+
+    private final ChangePinPage changePinPage;
+
+    private final AccountPage accountPage;
 
     /**
      * An instance of the options panel which should be used as a reference to this class.
@@ -47,9 +66,23 @@ public class OptionsPanel {
         
         this.optionsPage = new OptionsPage();
         this.withdrawPage = new WithdrawPage();
+        this.depositPage = new DepositPage();
+        this.paymentPage = new PaymentPage();
+        this.transferPage = new TransferPage();
+        this.checkBalancePage = new CheckBalancePage();
+        this.transactionsPage = new TransactionsPage();
+        this.changePinPage = new ChangePinPage();
+        this.accountPage = new AccountPage();
 
-        optionsPanel.add(optionsPage.getOptionsPage(), "Options Page");
-        optionsPanel.add(withdrawPage.getWithdrawPage(), "Withdraw Page");
+        optionsPanel.add(optionsPage.getOptionsPanel(), "Options Page");
+        optionsPanel.add(withdrawPage.getWithdrawPanel(), "Withdraw Page");
+        optionsPanel.add(depositPage.getDepositPanel(), "Deposit Page");
+        optionsPanel.add(paymentPage.getPaymentPanel(), "Payment Page");
+        optionsPanel.add(transferPage.getTransferPanel(), "Transfer Page");
+        optionsPanel.add(checkBalancePage.getCheckBalancePanel(), "Check Balance Page");
+        optionsPanel.add(transactionsPage.getTransactionsPanel(), "Transactions Page");
+        optionsPanel.add(changePinPage.getChangePinPanel(), "Chnage Pin Page");
+        optionsPanel.add(accountPage.getAccountPanel(), "Account Page");
         
         cardLayout.show(optionsPanel, "Options Page");
 
@@ -66,5 +99,33 @@ public class OptionsPanel {
 
     public WithdrawPage getWithdrawPage() {
         return this.withdrawPage;
+    }
+
+    public DepositPage getDepositPage() {
+        return this.depositPage;
+    }
+
+    public PaymentPage getPaymentPage() {
+        return this.paymentPage;
+    }
+
+    public TransferPage getTransferPage() {
+        return this.transferPage;
+    }
+
+    public CheckBalancePage getCheckBalancePage() {
+        return this.checkBalancePage;
+    }
+
+    public TransactionsPage getTransactionsPage() {
+        return this.transactionsPage;
+    }
+
+    public ChangePinPage getChangePinPage() {
+        return this.changePinPage;
+    }
+
+    public AccountPage getAccountPage() {
+        return this.accountPage;
     }
 }
