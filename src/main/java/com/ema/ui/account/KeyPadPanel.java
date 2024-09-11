@@ -9,21 +9,48 @@ import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * Displays and creates the key pad buttons.
+ */
 public class KeyPadPanel {
+    /**
+     * The container panel that holds all the buttons.
+     */
     private final JPanel keyPadPanel;
 
+    /**
+     * Represents the list of all number buttons in the key pad.
+     */
     private final LinkedList<JButton> numberBtns;
 
+    /**
+     * The period button.
+     */
     private final JButton periodBtn;
 
+    /**
+     * The cancel/delete button. 
+     */
     private final JButton cancelBtn;
 
+    /**
+     * The enter/submit button.
+     */
     private final JButton enterBtn;
 
+    /**
+     * The clear button.
+     */
     private final JButton clearBtn;
 
+    /**
+     * An instance of the KeyPadPanel which should be used as a reference to this class.
+     */
     public static KeyPadPanel instance;
 
+    /**
+     * The constructor setups the the key pad UI with the key pad panel. 
+     */
     public KeyPadPanel() {
         this.keyPadPanel = new JPanel();
         this.numberBtns = new LinkedList<>();
@@ -76,10 +103,20 @@ public class KeyPadPanel {
         instance = this;
     }
 
+    /**
+     * Retrieves the current instance of the KeyPadPanel.
+     * @return The current {@link KeyPadPanel} instance.
+     */
     public JPanel getKeyPadPanel() {
         return this.keyPadPanel;
     }
 
+    /**
+     * Creates a sylted button.
+     * @param title The title of the button.
+     * @param size The font size of the text.
+     * @return A formatted button with the provided title and font size.
+     */
     private JButton formattedButton(String title, int size) {
         JButton button = new JButton(title);
         button.setPreferredSize(new Dimension(125, 60));

@@ -2,6 +2,9 @@ package com.ema.ui.account;
 
 import javax.swing.JFrame;
 
+/**
+ * Displays the options screen with the key pad and options page.
+ */
 public class OptionsFrame extends JFrame {
     public OptionsFrame() {
         super.setSize(1400, 700);
