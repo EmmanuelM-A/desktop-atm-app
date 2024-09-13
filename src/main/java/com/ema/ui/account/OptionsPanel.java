@@ -11,6 +11,7 @@ import com.ema.ui.account.options.payment.PaymentPage;
 import com.ema.ui.account.options.pin.ChangePinPage;
 import com.ema.ui.account.options.transactions.TransactionsPage;
 import com.ema.ui.account.options.transfer.TransferPage;
+import com.ema.ui.account.options.withdraw.OtherPage;
 import com.ema.ui.account.options.withdraw.WithdrawPage;
 
 /**
@@ -72,6 +73,8 @@ public class OptionsPanel {
      */
     private final AccountPage accountPage;
 
+    private final OtherPage otherPage;
+
     /**
      * An instance of the OptionsPanel which should be used as a reference to this class.
      */
@@ -96,7 +99,9 @@ public class OptionsPanel {
         this.changePinPage = new ChangePinPage();
         this.accountPage = new AccountPage();
 
-        // Add them to page
+        this.otherPage = new OtherPage();
+
+        // Add them to main pages
         optionsPanel.add(optionsPage.getOptionsPanel(), "Options Page");
         optionsPanel.add(withdrawPage.getWithdrawPanel(), "Withdraw Page");
         optionsPanel.add(depositPage.getDepositPanel(), "Deposit Page");
@@ -106,6 +111,9 @@ public class OptionsPanel {
         optionsPanel.add(transactionsPage.getTransactionsPanel(), "Transactions Page");
         optionsPanel.add(changePinPage.getChangePinPanel(), "Chnage Pin Page");
         optionsPanel.add(accountPage.getAccountPanel(), "Account Page");
+
+        // The alternative pages
+        optionsPanel.add(otherPage.getOtherPage(), "Withdraw Other Page");
         
         // Set the options page as the default page
         cardLayout.show(optionsPanel, "Options Page");
