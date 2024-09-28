@@ -5,9 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import com.ema.ui.account.options.base.InputAmountPage;
-import com.ema.ui.account.options.base.SelectAmountPage;
 
 public class OtherPage {
     private JPanel otherPanel;
@@ -26,11 +26,23 @@ public class OtherPage {
 
         inputAmountPage.createInputAmountPage(
             otherPanel, 
-            "Input Amount to witdrawal below."
+            "Input the amount you wish to witdrawal."
         );
     }
 
     public JPanel getOtherPage() {
         return this.otherPanel;
+    }
+
+    public JButton getGoBackBtn() {
+        return this.inputAmountPage.getGoBackBtn();
+    }
+
+    public JButton getSubmitBtn() {
+        return this.inputAmountPage.getSubmitBtn();
+    }
+
+    public JTextField getInputField() {
+        return this.inputAmountPage.getInputField();
     }
 }
