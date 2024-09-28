@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.ema.actions.GoToPage;
+import com.ema.ui.account.OptionsPanel;
 
 /**
  * Holds and displays all the different ATM account option buttons.
@@ -78,14 +79,14 @@ public class OptionsPage {
         
         // Instantiate components
         this.header = new JLabel("Select an option from below");
-        this.withdrawBtn = formattedButton("Withdraw", 13, new GoToPage("Withdraw Page"));
-        this.depositBtn = formattedButton("Deposit", 13, new GoToPage("Deposit Page"));
-        this.transferBtn = formattedButton("Transfer", 13, new GoToPage("Transfer Page"));
-        this.paymentBtn = formattedButton("Payment", 13, new GoToPage("Payment Page"));
-        this.checkBalanceBtn = formattedButton("Check Balance", 13, new GoToPage("Check Balance Page"));
-        this.transactionsBtn = formattedButton("Transaction History", 13, new GoToPage("Transactions Page"));
-        this.changePinBtn = formattedButton("Change Pin", 13, new GoToPage("Change Pin Page"));
-        this.viewAccountBtn = formattedButton("View Account", 13, new GoToPage("Account Page"));
+        this.withdrawBtn = formattedButton("Withdraw", 13, new GoToPage(OptionsPanel.WITHDRAW_PAGE));
+        this.depositBtn = formattedButton("Deposit", 13, new GoToPage(OptionsPanel.DEPOSIT_PAGE));
+        this.transferBtn = formattedButton("Transfer", 13, new GoToPage(OptionsPanel.TRANSFER_PAGE));
+        this.paymentBtn = formattedButton("Payment", 13, new GoToPage(OptionsPanel.PAYMENT_PAGE));
+        this.checkBalanceBtn = formattedButton("Check Balance", 13, new GoToPage(OptionsPanel.CHECK_BALANCE_PAGE));
+        this.transactionsBtn = formattedButton("Transaction History", 13, new GoToPage(OptionsPanel.TRANSACTION_PAGE));
+        this.changePinBtn = formattedButton("Change Pin", 13, new GoToPage(OptionsPanel.CHANGE_PIN_PAGE));
+        this.viewAccountBtn = formattedButton("View Account", 13, new GoToPage(OptionsPanel.ACCOUNT_PAGE));
         this.exitBtn = formattedButton("Exit", 13, null);
         
         optionsPanel.setLayout(null);

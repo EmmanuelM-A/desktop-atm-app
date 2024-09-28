@@ -75,6 +75,20 @@ public class OptionsPanel {
 
     private final OtherPage otherPage;
 
+    // Below holds the names of each option page on the options panel.
+    public final static String WITHDRAW_PAGE = "Withdraw Page";
+    public final static String DEPOSIT_PAGE = "Deposit Page";
+    public final static String PAYMENT_PAGE = "Payment Page";
+    public final static String TRANSFER_PAGE = "Transfer Page";
+    public final static String CHECK_BALANCE_PAGE = "Check Balance Page";
+    public final static String TRANSACTION_PAGE = "Transactions Page";
+    public final static String CHANGE_PIN_PAGE = "Change Pin Page";
+    public final static String ACCOUNT_PAGE = "Account Page";
+    public final static String OPTIONS_PAGE = "Options Page";
+
+    public final static String WITHDRAW_PAGE_ALT = "Withdraw Other Page";
+    public final static String DEPOSIT_PAGE_ALT = "Deposit Other Page";
+
     /**
      * An instance of the OptionsPanel which should be used as a reference to this class.
      */
@@ -82,7 +96,7 @@ public class OptionsPanel {
 
     /**
      * The constructor setups the UI with the options page as default and different pages
-     * as alternatives accessed via buttons. The pages are managed with the CardLayout layout. 
+     * as alternatives accessed via buttons. The pages are managed and displayed using the CardLayout layout. 
      */
     public OptionsPanel() {
         this.cardLayout = new CardLayout();
@@ -102,21 +116,21 @@ public class OptionsPanel {
         this.otherPage = new OtherPage();
 
         // Add them to main pages
-        optionsPanel.add(optionsPage.getOptionsPanel(), "Options Page");
-        optionsPanel.add(withdrawPage.getWithdrawPanel(), "Withdraw Page");
-        optionsPanel.add(depositPage.getDepositPanel(), "Deposit Page");
-        optionsPanel.add(paymentPage.getPaymentPanel(), "Payment Page");
-        optionsPanel.add(transferPage.getTransferPanel(), "Transfer Page");
-        optionsPanel.add(checkBalancePage.getCheckBalancePanel(), "Check Balance Page");
-        optionsPanel.add(transactionsPage.getTransactionsPanel(), "Transactions Page");
-        optionsPanel.add(changePinPage.getChangePinPanel(), "Chnage Pin Page");
-        optionsPanel.add(accountPage.getAccountPanel(), "Account Page");
+        optionsPanel.add(optionsPage.getOptionsPanel(), OPTIONS_PAGE);
+        optionsPanel.add(withdrawPage.getWithdrawPanel(), WITHDRAW_PAGE);
+        optionsPanel.add(depositPage.getDepositPanel(), DEPOSIT_PAGE);
+        optionsPanel.add(paymentPage.getPaymentPanel(), PAYMENT_PAGE);
+        optionsPanel.add(transferPage.getTransferPanel(), TRANSFER_PAGE);
+        optionsPanel.add(checkBalancePage.getCheckBalancePanel(), CHECK_BALANCE_PAGE);
+        optionsPanel.add(transactionsPage.getTransactionsPanel(), TRANSACTION_PAGE);
+        optionsPanel.add(changePinPage.getChangePinPanel(), CHANGE_PIN_PAGE);
+        optionsPanel.add(accountPage.getAccountPanel(), ACCOUNT_PAGE);
 
         // The alternative pages
-        optionsPanel.add(otherPage.getOtherPage(), "Withdraw Other Page");
+        optionsPanel.add(otherPage.getOtherPage(), WITHDRAW_PAGE_ALT);
         
         // Set the options page as the default page
-        cardLayout.show(optionsPanel, "Options Page");
+        cardLayout.show(optionsPanel, OPTIONS_PAGE);
 
         instance = this;
     }

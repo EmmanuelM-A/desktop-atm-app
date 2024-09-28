@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.ema.ui.account.OptionsPanel;
 import com.ema.ui.account.options.base.InputAmountPage;
 
 public class OtherPage {
@@ -27,7 +28,7 @@ public class OtherPage {
         inputAmountPage.createInputAmountPage(
             otherPanel, 
             "Input the amount you wish to witdrawal.",
-            "Withdraw Page"
+            OptionsPanel.WITHDRAW_PAGE
         );
     }
 
