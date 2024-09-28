@@ -8,7 +8,13 @@ import javax.swing.JPanel;
 
 import com.ema.ui.account.OptionsPanel;
 
-public class GoToOtherPage implements ActionListener {
+public class GoToPage implements ActionListener {
+
+    private String goToPage;
+
+    public GoToPage(String goToPage) {
+        this.goToPage = goToPage;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -18,8 +24,7 @@ public class GoToOtherPage implements ActionListener {
         // Gets the parent panel
         JPanel optionsPanel = OptionsPanel.instance.getOptionsPanel();
 
-        // Switches to the account page
-        cardLayout.show(optionsPanel, "Withdraw Other Page");
-    }
-    
+        // Switches to the paymnet page
+        cardLayout.show(optionsPanel, this.goToPage);
+    } 
 }

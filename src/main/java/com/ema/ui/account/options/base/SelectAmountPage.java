@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.ema.actions.GoToOptionsPage;
+import com.ema.actions.GoToPage;
 
 public class SelectAmountPage {
     /**
@@ -54,7 +54,7 @@ public class SelectAmountPage {
         }
 
         // Instantiate the exit button
-        this.exitBtn = formatedButton("Exit", new GoToOptionsPage());
+        this.exitBtn = formatedButton("Exit", new GoToPage("Options Page"));
 
         // Position the components on the page panel
         pageHeader.setBounds(350, 30, 200, 60);

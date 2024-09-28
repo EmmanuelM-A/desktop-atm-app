@@ -9,14 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.ema.actions.GoToAccountPage;
-import com.ema.actions.GoToChangePinPage;
-import com.ema.actions.GoToCheckBalancePage;
-import com.ema.actions.GoToDepositPage;
-import com.ema.actions.GoToPaymentPage;
-import com.ema.actions.GoToTransactionsPage;
-import com.ema.actions.GoToTransferPage;
-import com.ema.actions.GoToWidthdrawPage;
+import com.ema.actions.GoToPage;
 
 /**
  * Holds and displays all the different ATM account option buttons.
@@ -85,14 +78,14 @@ public class OptionsPage {
         
         // Instantiate components
         this.header = new JLabel("Select an option from below");
-        this.withdrawBtn = formattedButton("Withdraw", 13, new GoToWidthdrawPage());
-        this.depositBtn = formattedButton("Deposit", 13, new GoToDepositPage());
-        this.transferBtn = formattedButton("Transfer", 13, new GoToTransferPage());
-        this.paymentBtn = formattedButton("Payment", 13, new GoToPaymentPage());
-        this.checkBalanceBtn = formattedButton("Check Balance", 13, new GoToCheckBalancePage());
-        this.transactionsBtn = formattedButton("Transaction History", 13, new GoToTransactionsPage());
-        this.changePinBtn = formattedButton("Change Pin", 13, new GoToChangePinPage());
-        this.viewAccountBtn = formattedButton("View Account", 13, new GoToAccountPage());
+        this.withdrawBtn = formattedButton("Withdraw", 13, new GoToPage("Withdraw Page"));
+        this.depositBtn = formattedButton("Deposit", 13, new GoToPage("Deposit Page"));
+        this.transferBtn = formattedButton("Transfer", 13, new GoToPage("Transfer Page"));
+        this.paymentBtn = formattedButton("Payment", 13, new GoToPage("Payment Page"));
+        this.checkBalanceBtn = formattedButton("Check Balance", 13, new GoToPage("Check Balance Page"));
+        this.transactionsBtn = formattedButton("Transaction History", 13, new GoToPage("Transactions Page"));
+        this.changePinBtn = formattedButton("Change Pin", 13, new GoToPage("Change Pin Page"));
+        this.viewAccountBtn = formattedButton("View Account", 13, new GoToPage("Account Page"));
         this.exitBtn = formattedButton("Exit", 13, null);
         
         optionsPanel.setLayout(null);

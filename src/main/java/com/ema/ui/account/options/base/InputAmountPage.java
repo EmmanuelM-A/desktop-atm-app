@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.ema.actions.GoToPage;
+
 public class InputAmountPage {
     private JButton sumbitBtn;
     
@@ -16,14 +18,14 @@ public class InputAmountPage {
 
     private JTextField inputField;
 
-    public void createInputAmountPage(JPanel pagePanel, String pageTitle) {
+    public void createInputAmountPage(JPanel pagePanel, String pageTitle, String goToPage) {
         JLabel pageHeader = formatPageHeader(pageTitle);
 
         inputField = new JTextField("");
 
         sumbitBtn = formatedButton("Ok", null);
 
-        this.goBackBtn = formatedButton("Go Back", null);
+        this.goBackBtn = formatedButton("Go Back", new GoToPage(goToPage));
 
         // Position the components on the page panel
         pageHeader.setBounds(350, 30, 400, 60);

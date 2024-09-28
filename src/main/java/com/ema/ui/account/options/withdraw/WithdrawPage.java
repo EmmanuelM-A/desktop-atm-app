@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import com.ema.actions.GoToOtherPage;
+import com.ema.actions.GoToPage;
 import com.ema.ui.account.options.base.SelectAmountPage;
 
 public class WithdrawPage {
@@ -29,7 +29,7 @@ public class WithdrawPage {
             withdrawPanel, 
             "Select an amount to withdrawal or select other for more options.", 
             new String[]{"5", "10", "20", "50", "100", "200", "500", "Other"}, 
-            new ActionListener[]{null, null, null, null, null, null, null, new GoToOtherPage()}
+            new ActionListener[]{null, null, null, null, null, null, null, new GoToPage("Withdraw Other Page")}
         );
     }
 

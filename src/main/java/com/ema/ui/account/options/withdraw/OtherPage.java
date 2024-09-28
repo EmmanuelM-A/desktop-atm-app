@@ -26,7 +26,8 @@ public class OtherPage {
 
         inputAmountPage.createInputAmountPage(
             otherPanel, 
-            "Input the amount you wish to witdrawal."
+            "Input the amount you wish to witdrawal.",
+            "Withdraw Page"
         );
     }
 
