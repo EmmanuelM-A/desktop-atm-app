@@ -21,6 +21,8 @@ public class SignInFrame extends JFrame {
         super.add(login.getLoginPanel());
 
         super.setVisible(true);
+
+        instance = this;
     }
 
     public SignInPanel getLogin() {

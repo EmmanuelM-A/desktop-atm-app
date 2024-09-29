@@ -12,9 +12,8 @@ public class ATM
 {
     public static void main( String[] args )
     {
-        //SignInFrame.instance = new SignInFrame();
+        new SignInFrame();
 
-        new OptionsFrame();
-        //new SignUpFrame();
+        //new OptionsFrame();
     }
 }

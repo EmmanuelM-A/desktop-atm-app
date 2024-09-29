@@ -30,17 +30,17 @@ public class SignUpPanel {
         personalDetialsPage.getNextBtn().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /*if (
+                if (
                     signUpLogic.validateName(personalDetialsPage.getFirstnameInput().getText()) && 
                     signUpLogic.validateName(personalDetialsPage.getLastnameInput().getText()) && 
                     signUpLogic.validateDob(personalDetialsPage.getDobInput().getText()) && 
                     signUpLogic.validateAddress(personalDetialsPage.getAddressInput().getText()) && 
                     signUpLogic.validatePhoneNumber(personalDetialsPage.getPhoneNumberInput().getText())
-                    ) {*/
+                    ) {
                         cardLayout.show(signUpPanel, "Account detials");
                         accountDetailsPage.setAccountName(createAccountName());
                         accountDetailsPage.getAccountNameLabel().setText("Your account name: " + accountDetailsPage.getAccountName());
-                //}                
+                }                
             }
         });
 

@@ -1,6 +1,5 @@
 package com.ema.ui.account.options.base;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
