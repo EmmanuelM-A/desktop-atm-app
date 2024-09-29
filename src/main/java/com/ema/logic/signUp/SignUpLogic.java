@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import com.ema.authentication.signUp.SignUpService;
 import com.ema.database.DatabaseHandler;
+import com.mysql.cj.util.StringUtils;
 
 public class SignUpLogic implements SignUpService {
 
@@ -79,6 +80,21 @@ public class SignUpLogic implements SignUpService {
 
         // Check if characters are all numbers
         if(!accountPin.matches("[0-9]+")) return false;
+
+        return true;
+    }
+
+    public boolean areFieldsEmpty(String firstName, String lastName, String dob, String address, String phoneNumber) {
+        // Checks if each field is empty, if at least one is empty returns false
+        if(StringUtils.isNullOrEmpty(firstName)) return false;
+
+        if(StringUtils.isNullOrEmpty(lastName)) return false;
+
+        if(StringUtils.isNullOrEmpty(dob)) return false;
+
+        if(StringUtils.isNullOrEmpty(address)) return false;
+
+        if(StringUtils.isNullOrEmpty(phoneNumber)) return false;
 
         return true;
     }

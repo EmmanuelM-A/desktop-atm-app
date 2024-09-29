@@ -73,4 +73,20 @@ public class SignUpPanel {
     public String createAccountName() {
         return personalDetialsPage.getFirstnameInput().getText() + " " + personalDetialsPage.getLastnameInput().getText();
     }
+
+    private boolean validateInputs(PersonalDetialsPage personalDetialsPage) {
+        String firsname = personalDetialsPage.getFirstnameInput().getText();
+        String lastname = personalDetialsPage.getLastnameInput().getText();
+        String dob = personalDetialsPage.getDobInput().getText();
+        String address = personalDetialsPage.getAddressInput().getText();
+        String phoneNumber = personalDetialsPage.getPhoneNumberInput().getText();
+
+        JButton nextBtn = personalDetialsPage.getNextBtn();
+
+        SignUpLogic signUpLogic = new SignUpLogic();
+
+        if(!signUpLogic.areFieldsEmpty(null, null, null, null, null)) {
+            
+        }
+    }
 }
