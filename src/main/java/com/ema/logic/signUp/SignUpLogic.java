@@ -12,13 +12,90 @@ import java.util.regex.Pattern;
 
 import com.ema.authentication.signUp.SignUpService;
 import com.ema.database.DatabaseHandler;
+import com.ema.ui.signUp.PersonalDetialsPage;
 import com.mysql.cj.util.StringUtils;
 
 public class SignUpLogic implements SignUpService {
 
+    /**
+     * Checks if each field in the {@link PersonalDetialsPage} instance is empty or not.
+     * @param firstName The firstname value inputted into the firstname field.
+     * @param lastName The lastname value inputted into the lastname field.
+     * @param dob The dob value inputted into the dob field.
+     * @param address The address value inputted into the address field.
+     * @param phoneNumber The phoneNumber value inputted into the phoneNumber field.
+     * @return If at least one field is empty the method returns false. All fields must not 
+     * be empty for the method to return true.
+     */
+    public boolean areFieldsEmpty(String firstName, String lastName, String dob, String address, String phoneNumber) {
+        if(StringUtils.isNullOrEmpty(firstName)) return false;
+
+        if(StringUtils.isNullOrEmpty(lastName)) return false;
+
+        if(StringUtils.isNullOrEmpty(dob)) return false;
+
+        if(StringUtils.isNullOrEmpty(address)) return false;
+
+        if(StringUtils.isNullOrEmpty(phoneNumber)) return false;
+
+        return true;
+    }
+
+    /**
+     * Validates all the inputs fields in the {@link PersonalDetialsPage} instance and displays their corresponding error
+     * messages where appropriate.
+     * @param personalDetialsPage The instance of the {@link PersonalDetialsPage}.
+     * @return True if all fields have been validated successfully, otherwise false if not.
+     */
+    public boolean validatePersonalDetialsInputs(PersonalDetialsPage personalDetialsPage) {
+        String firsname = personalDetialsPage.getFirstnameInput().getText();
+        String lastname = personalDetialsPage.getLastnameInput().getText();
+        String dob = personalDetialsPage.getDobInput().getText();
+        String address = personalDetialsPage.getAddressInput().getText();
+        String phoneNumber = personalDetialsPage.getPhoneNumberInput().getText();
+
+        if(!areFieldsEmpty(firsname, lastname, dob, address, phoneNumber)) {
+            personalDetialsPage.getGenericErrMsgLabel().setText("All fields must be filled!");
+            return false;
+        }
+
+        if(!validateName(firsname)) {
+            // Display error message in input field
+            System.out.println("Check firstname field!");
+            return false;
+        }
+        
+        if(!validateName(lastname)) {
+            // Display error message in input field
+            System.out.println("Check lastname field!");
+            return false;
+        }
+
+        if(!validateDob(dob)) {
+            // Display error message in input field
+            System.out.println("Incorrect Date format!");
+            return false;
+        }
+
+        if(!validateAddress(address)) {
+            // Display error message in input field
+            System.out.println("Check address field!");
+            return false;
+        }
+
+        if(!validatePhoneNumber(phoneNumber)) {
+            // Display error message in input field
+            System.out.println("Check phone number field");
+            return false;
+        }
+        
+        System.out.println("All personal detial fields validated successfully!");
+        return true;
+    }
+
     @Override
     public boolean validateName(String name) {
-        if(name.equals("")) return false;
+        if(StringUtils.isNullOrEmpty(name)) return false;
         
         if(name.length() > 255) return false;
 
@@ -29,7 +106,7 @@ public class SignUpLogic implements SignUpService {
 
     @Override
     public boolean validateDob(String dob) {
-        if(dob.equals("")) return false;
+        if(StringUtils.isNullOrEmpty(dob)) return false;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -43,7 +120,7 @@ public class SignUpLogic implements SignUpService {
 
     @Override
     public boolean validateAddress(String address) {
-        if(address.equals("")) return false;
+        if(StringUtils.isNullOrEmpty(address)) return false;
         
         if(address.length() > 255) return false;
         return true;
@@ -69,7 +146,7 @@ public class SignUpLogic implements SignUpService {
     @Override
     public boolean validateAccountPin(String accountPin) {
         // Check if empty
-        if(accountPin.equals("")) {
+        if(StringUtils.isNullOrEmpty(accountPin)) {
             return false;
         }
 
@@ -80,21 +157,6 @@ public class SignUpLogic implements SignUpService {
 
         // Check if characters are all numbers
         if(!accountPin.matches("[0-9]+")) return false;
-
-        return true;
-    }
-
-    public boolean areFieldsEmpty(String firstName, String lastName, String dob, String address, String phoneNumber) {
-        // Checks if each field is empty, if at least one is empty returns false
-        if(StringUtils.isNullOrEmpty(firstName)) return false;
-
-        if(StringUtils.isNullOrEmpty(lastName)) return false;
-
-        if(StringUtils.isNullOrEmpty(dob)) return false;
-
-        if(StringUtils.isNullOrEmpty(address)) return false;
-
-        if(StringUtils.isNullOrEmpty(phoneNumber)) return false;
 
         return true;
     }

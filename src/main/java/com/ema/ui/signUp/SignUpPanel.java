@@ -33,19 +33,11 @@ public class SignUpPanel {
         personalDetialsPage.getNextBtn().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (
-                    signUpLogic.validateName(personalDetialsPage.getFirstnameInput().getText()) && 
-                    signUpLogic.validateName(personalDetialsPage.getLastnameInput().getText()) && 
-                    signUpLogic.validateDob(personalDetialsPage.getDobInput().getText()) && 
-                    signUpLogic.validateAddress(personalDetialsPage.getAddressInput().getText()) && 
-                    signUpLogic.validatePhoneNumber(personalDetialsPage.getPhoneNumberInput().getText())
-                    ) {
-                        cardLayout.show(signUpPanel, ACCOUNT_DETAILS_PAGE);
-                        accountDetailsPage.setAccountName(createAccountName());
-                        accountDetailsPage.getAccountNameLabel().setText("Your account name: " + accountDetailsPage.getAccountName());
-                } else {
-                    personalDetialsPage.getGenericErrMsgLabel().setText("Please Check Inputs!");
-                }               
+                if (signUpLogic.validatePersonalDetialsInputs(personalDetialsPage)) {
+                    cardLayout.show(signUpPanel, ACCOUNT_DETAILS_PAGE);
+                    accountDetailsPage.setAccountName(createAccountName());
+                    accountDetailsPage.getAccountNameLabel().setText("Your account name: " + accountDetailsPage.getAccountName());
+                }              
             }
         });
 
@@ -72,21 +64,5 @@ public class SignUpPanel {
 
     public String createAccountName() {
         return personalDetialsPage.getFirstnameInput().getText() + " " + personalDetialsPage.getLastnameInput().getText();
-    }
-
-    private boolean validateInputs(PersonalDetialsPage personalDetialsPage) {
-        String firsname = personalDetialsPage.getFirstnameInput().getText();
-        String lastname = personalDetialsPage.getLastnameInput().getText();
-        String dob = personalDetialsPage.getDobInput().getText();
-        String address = personalDetialsPage.getAddressInput().getText();
-        String phoneNumber = personalDetialsPage.getPhoneNumberInput().getText();
-
-        JButton nextBtn = personalDetialsPage.getNextBtn();
-
-        SignUpLogic signUpLogic = new SignUpLogic();
-
-        if(!signUpLogic.areFieldsEmpty(null, null, null, null, null)) {
-            
-        }
     }
 }
