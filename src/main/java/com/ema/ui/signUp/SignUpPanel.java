@@ -14,18 +14,21 @@ public class SignUpPanel {
     private final PersonalDetialsPage personalDetialsPage;
     private final AccountDetailsPage accountDetailsPage;
 
+    public final static String PERSONAL_DETAILS_PAGE = "Personal Details Page";
+    public final static String ACCOUNT_DETAILS_PAGE = "Account Details Page"; 
+
     public SignUpPanel(JFrame frame) {
         this.cardLayout = new CardLayout();
         this.signUpPanel = new JPanel(cardLayout);
         this.personalDetialsPage = new PersonalDetialsPage(frame);
         this.accountDetailsPage = new AccountDetailsPage(frame);
 
-        signUpPanel.add(personalDetialsPage.getPersonalDetailsPanel(), "Personal detials");
-        signUpPanel.add(accountDetailsPage.getAccountDetailsPanel(), "Account detials");
+        signUpPanel.add(personalDetialsPage.getPersonalDetailsPanel(), PERSONAL_DETAILS_PAGE);
+        signUpPanel.add(accountDetailsPage.getAccountDetailsPanel(), ACCOUNT_DETAILS_PAGE);
 
         SignUpLogic signUpLogic = new SignUpLogic();
 
-        cardLayout.show(signUpPanel, "Personal details");
+        cardLayout.show(signUpPanel, PERSONAL_DETAILS_PAGE);
 
         personalDetialsPage.getNextBtn().addActionListener(new ActionListener() {
             @Override
@@ -37,7 +40,7 @@ public class SignUpPanel {
                     signUpLogic.validateAddress(personalDetialsPage.getAddressInput().getText()) && 
                     signUpLogic.validatePhoneNumber(personalDetialsPage.getPhoneNumberInput().getText())
                     ) {
-                        cardLayout.show(signUpPanel, "Account detials");
+                        cardLayout.show(signUpPanel, ACCOUNT_DETAILS_PAGE);
                         accountDetailsPage.setAccountName(createAccountName());
                         accountDetailsPage.getAccountNameLabel().setText("Your account name: " + accountDetailsPage.getAccountName());
                 } else {
@@ -49,7 +52,7 @@ public class SignUpPanel {
         accountDetailsPage.getPrevBtn().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(signUpPanel, "Personal detials");
+                cardLayout.show(signUpPanel, PERSONAL_DETAILS_PAGE);
             }
         });
         
