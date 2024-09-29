@@ -10,33 +10,26 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
+import javax.swing.JPasswordField;
+
 import com.ema.authentication.signUp.SignUpService;
 import com.ema.database.DatabaseHandler;
+import com.ema.ui.signUp.AccountDetailsPage;
 import com.ema.ui.signUp.PersonalDetialsPage;
 import com.mysql.cj.util.StringUtils;
 
 public class SignUpLogic implements SignUpService {
 
     /**
-     * Checks if each field in the {@link PersonalDetialsPage} instance is empty or not.
-     * @param firstName The firstname value inputted into the firstname field.
-     * @param lastName The lastname value inputted into the lastname field.
-     * @param dob The dob value inputted into the dob field.
-     * @param address The address value inputted into the address field.
-     * @param phoneNumber The phoneNumber value inputted into the phoneNumber field.
+     * Checks if each field on a page is empty or not.
+     * @param fields The list of fields to be checked.
      * @return If at least one field is empty the method returns false. All fields must not 
      * be empty for the method to return true.
      */
-    public boolean areFieldsEmpty(String firstName, String lastName, String dob, String address, String phoneNumber) {
-        if(StringUtils.isNullOrEmpty(firstName)) return false;
-
-        if(StringUtils.isNullOrEmpty(lastName)) return false;
-
-        if(StringUtils.isNullOrEmpty(dob)) return false;
-
-        if(StringUtils.isNullOrEmpty(address)) return false;
-
-        if(StringUtils.isNullOrEmpty(phoneNumber)) return false;
+    public boolean areFieldsEmpty(String[] fields) {
+        for(String field : fields) {
+            if(StringUtils.isNullOrEmpty(field)) return false;
+        }
 
         return true;
     }
@@ -54,7 +47,7 @@ public class SignUpLogic implements SignUpService {
         String address = personalDetialsPage.getAddressInput().getText();
         String phoneNumber = personalDetialsPage.getPhoneNumberInput().getText();
 
-        if(!areFieldsEmpty(firsname, lastname, dob, address, phoneNumber)) {
+        if(!areFieldsEmpty(new String[]{firsname, lastname, dob, address, phoneNumber})) {
             personalDetialsPage.getGenericErrMsgLabel().setText("All fields must be filled!");
             return false;
         }
@@ -91,6 +84,16 @@ public class SignUpLogic implements SignUpService {
         
         System.out.println("All personal detial fields validated successfully!");
         return true;
+    }
+
+    public boolean validateAccountDetialsInputs(AccountDetailsPage accountDetailsPage) {
+        String accountType = String.valueOf(accountDetailsPage.getAccountTypeInput().getSelectedItem());
+        String accountPin = String.valueOf(accountDetailsPage.getAccountPinInput().getPassword());
+        String confirmAccountPin = String.valueOf(accountDetailsPage.getConfirmAccountPinInput().getPassword());
+
+
+
+
     }
 
     @Override
