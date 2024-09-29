@@ -14,33 +14,16 @@ import com.ema.ui.signUp.SignUpFrame;
 public class SignUpAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Get sign up panel detials
-        PersonalDetialsPage personalDetailsPanel = SignUpFrame.instance.getSignUpPanel().getPersonalDetialsPage();
-        AccountDetailsPage accountDetailsPanel = SignUpFrame.instance.getSignUpPanel().getAccountDetailsPage();
-
-        // Get sign up inputs
-        JTextField firstname = personalDetailsPanel.getFirstnameInput();
-        JTextField lastname = personalDetailsPanel.getLastnameInput();
-        JTextField dob = personalDetailsPanel.getDobInput();
-        JTextField address = personalDetailsPanel.getAddressInput();
-        JTextField phoneNumber = personalDetailsPanel.getPhoneNumberInput();
-
-        String accountNo = accountDetailsPanel.getAccountNo();
-        String sortCode = accountDetailsPanel.getSortCode();
-        String accountName = accountDetailsPanel.getAccountName();
-        String accountType = String.valueOf(accountDetailsPanel.getAccountTypeInput().getSelectedItem());
-        JPasswordField accountPin = accountDetailsPanel.getAccountPinInput();
+        PersonalDetialsPage personalDetailsPage = SignUpFrame.instance.getSignUpPanel().getPersonalDetialsPage();
+        AccountDetailsPage accountDetailsPage = SignUpFrame.instance.getSignUpPanel().getAccountDetailsPage();
 
         double balance = 0.0;
 
-        // Run action
         SignUpLogic signUpLogic = new SignUpLogic();
+   
+        String feedback = signUpLogic.signUp(personalDetailsPage, accountDetailsPage, balance) ? "Sign Up Succesful!" : "Sign Up Unsuccessful!";
 
-        if(accountDetailsPanel.confirmAccountPin()) {
-            boolean success = signUpLogic.signUp(firstname.getText(), lastname.getText(), dob.getText(), address.getText(), phoneNumber.getText(), accountName, accountNo, sortCode, accountType, new String(accountPin.getPassword()), balance);
-            System.out.println("Action: " + success);
-        } else {
-            System.out.println("Error occured");
-        }
+        System.out.println(feedback);
+
     }
 }

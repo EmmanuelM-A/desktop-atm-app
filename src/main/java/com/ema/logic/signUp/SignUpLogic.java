@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import com.ema.authentication.signUp.SignUpService;
 import com.ema.database.DatabaseHandler;
@@ -91,9 +92,31 @@ public class SignUpLogic implements SignUpService {
         String accountPin = String.valueOf(accountDetailsPage.getAccountPinInput().getPassword());
         String confirmAccountPin = String.valueOf(accountDetailsPage.getConfirmAccountPinInput().getPassword());
 
+        if(!areFieldsEmpty(new String[]{accountType, accountPin, confirmAccountPin})) {
+            accountDetailsPage.getErrMsgLabel().setText("All fields must be filled!");
+            return false;
+        }
 
+        if(!validateAccountType(accountType)) {
+            // Display error message in input field
+            System.out.println("Check the account type selected!");
+            return false;
+        }
 
+        if(!validateAccountPin(accountPin)) {
+            // Display error message in input field
+            System.out.println("Invalid Pin inputted!");
+            return false;
+        }
 
+        if(!validateAccountPin(confirmAccountPin)) {
+            // Display error message in input field
+            System.out.println("Invalid Pin inputted!");
+            return false;
+        }
+
+        System.out.println("Account Details Validated Successfully!");
+        return true;
     }
 
     @Override
@@ -165,17 +188,30 @@ public class SignUpLogic implements SignUpService {
     }
 
     @Override
-    public boolean signUp(String firstName, String lastName, String dob, String address, String phoneNumber, String accountName, String accountNumber, String sortCode, String accountType, String pin, double initialBalance) {
-        if(!validateName(firstName) || !validateName(lastName) || !validateDob(dob) || !validateAddress(address) || !validatePhoneNumber(phoneNumber) || !validateAccountType(accountType) || !validateAccountPin(pin)) {
-            System.out.println(validateName(firstName));
-            System.out.println(validateName(lastName));
-            System.out.println(validateDob(dob));
-            System.out.println(validateAddress(address));
-            System.out.println(validatePhoneNumber(phoneNumber));
-            System.out.println(validateAccountType(accountType));
-            System.out.println(validateAccountPin(pin));
+    public boolean signUp(PersonalDetialsPage personalDetialsPage, AccountDetailsPage accountDetailsPage, double initialBalance) {
+        if(!validateAccountDetialsInputs(accountDetailsPage)) {
+            System.out.println("Account detials inputted are invalid!");
             return false;
         }
+
+        if(!accountDetailsPage.confirmAccountPin()) {
+            System.out.println("Pins do not match!");
+            return false;
+        }
+
+        // Get sign up inputs
+        String firstname = personalDetialsPage.getFirstnameInput().getText();
+        String lastname = personalDetialsPage.getLastnameInput().getText();
+        String dob = personalDetialsPage.getDobInput().getText();
+        String address = personalDetialsPage.getAddressInput().getText();
+        String phoneNumber = personalDetialsPage.getPhoneNumberInput().getText();
+
+        String accountNo = accountDetailsPage.getAccountNo();
+        String sortCode = accountDetailsPage.getSortCode();
+        String accountName = accountDetailsPage.getAccountName();
+        String accountType = String.valueOf(accountDetailsPage.getAccountTypeInput().getSelectedItem());
+        String accountPin = String.valueOf(accountDetailsPage.getAccountPinInput().getPassword());
+
 
         Connection connection = null;
         PreparedStatement holderStatement = null;
@@ -195,8 +231,8 @@ public class SignUpLogic implements SignUpService {
     
             // Insert into Holder table
             holderStatement = connection.prepareStatement(holderInsertQuery, PreparedStatement.RETURN_GENERATED_KEYS);
-            holderStatement.setString(1, firstName);
-            holderStatement.setString(2, lastName);
+            holderStatement.setString(1, firstname);
+            holderStatement.setString(2, lastname);
             holderStatement.setDate(3, formattedDob);
             holderStatement.setString(4, address);
             holderStatement.setString(5, phoneNumber);
@@ -216,10 +252,10 @@ public class SignUpLogic implements SignUpService {
                 // Insert into Account table
                 accountStatement = connection.prepareStatement(accountInsertQuery);
                 accountStatement.setString(1, accountName);
-                accountStatement.setString(2, accountNumber);
+                accountStatement.setString(2, accountNo);
                 accountStatement.setString(3, sortCode);
                 accountStatement.setString(4, accountType);
-                accountStatement.setString(5, pin);
+                accountStatement.setString(5, accountPin);
                 accountStatement.setDouble(6, initialBalance);
                 accountStatement.setLong(7, lastHolderId);
     

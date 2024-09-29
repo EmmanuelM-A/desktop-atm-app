@@ -205,7 +205,7 @@ public class AccountDetailsPage {
     }
 
     public boolean confirmAccountPin() {
-        if(accountPinInput.getPassword() == confirmAccountPinInput.getPassword()) {
+        if(new String(accountPinInput.getPassword()).equals(new String(confirmAccountPinInput.getPassword()))) {
             return true;
         } else {
             errMsg.setText("Pins do not match!");
