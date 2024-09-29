@@ -93,7 +93,7 @@ public class AccountDetailsPage {
         accountDetailsPanel.add(confirmAccountPinInput);
 
         // Error message
-        errMsg.setBackground(Color.RED);
+        errMsg.setForeground(Color.RED);
         errMsg.setBounds(100, 490, 200, 15);
         accountDetailsPanel.add(errMsg);
 

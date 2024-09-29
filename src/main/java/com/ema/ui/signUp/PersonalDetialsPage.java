@@ -16,6 +16,7 @@ public class PersonalDetialsPage {
     private final JLabel dob;
     private final JLabel address;
     private final JLabel phoneNumber;
+    private final JLabel genericErrMsg;
     private final JTextField firstnameInput;
     private final JTextField lastnameInput;
     private final JTextField dobInput;
@@ -32,6 +33,7 @@ public class PersonalDetialsPage {
         this.dob = formattedLabel("Enter your date of birth", 15);
         this.address = formattedLabel("Enter your address:", 15);
         this.phoneNumber = formattedLabel("Enter your phone number:", 15);
+        this.genericErrMsg = formattedLabel("", 13);
         this.firstnameInput = new JTextField();
         this.lastnameInput = new JTextField();
         this.dobInput = new JTextField("YYYY-MM-DD");
@@ -85,6 +87,11 @@ public class PersonalDetialsPage {
         phoneNumberInput.setBounds(100, 470, 400, 30);
         personalDetailsPanel.add(phoneNumberInput);
 
+        // Generic Error
+        genericErrMsg.setForeground(Color.RED);
+        genericErrMsg.setBounds(100, 510, 200, 15);
+        personalDetailsPanel.add(genericErrMsg);
+
         // Exit Button
         exitBtn.setBounds(100, 570, 80, 40);
         exitBtn.addActionListener(new GoToSignInAction(frame));
@@ -98,6 +105,10 @@ public class PersonalDetialsPage {
 
     public JPanel getPersonalDetailsPanel() {
         return this.personalDetailsPanel;
+    }
+
+    public JLabel getGenericErrMsgLabel() {
+        return this.genericErrMsg;
     }
 
     public JTextField getFirstnameInput() {

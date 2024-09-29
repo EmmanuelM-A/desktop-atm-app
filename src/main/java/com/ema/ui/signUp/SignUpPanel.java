@@ -40,7 +40,9 @@ public class SignUpPanel {
                         cardLayout.show(signUpPanel, "Account detials");
                         accountDetailsPage.setAccountName(createAccountName());
                         accountDetailsPage.getAccountNameLabel().setText("Your account name: " + accountDetailsPage.getAccountName());
-                }                
+                } else {
+                    personalDetialsPage.getGenericErrMsgLabel().setText("Please Check Inputs!");
+                }               
             }
         });
 
