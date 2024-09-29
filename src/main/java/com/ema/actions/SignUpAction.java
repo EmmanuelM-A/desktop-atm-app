@@ -39,6 +39,8 @@ public class SignUpAction implements ActionListener {
         if(accountDetailsPanel.confirmAccountPin()) {
             boolean success = signUpLogic.signUp(firstname.getText(), lastname.getText(), dob.getText(), address.getText(), phoneNumber.getText(), accountName, accountNo, sortCode, accountType, new String(accountPin.getPassword()), balance);
             System.out.println("Action: " + success);
+        } else {
+            System.out.println("Error occured");
         }
     }
 }

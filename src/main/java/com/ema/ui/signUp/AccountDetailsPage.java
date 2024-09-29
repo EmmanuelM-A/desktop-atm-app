@@ -22,6 +22,7 @@ public class AccountDetailsPage {
     private final JComboBox<String> accountTypeInput;
     private final JPasswordField accountPinInput;
     private final JPasswordField confirmAccountPinInput;
+    private final JLabel errMsg;
     private final JButton exitBtn, prevBtn, submitBtn;
 
     private final String accountNo;
@@ -45,6 +46,7 @@ public class AccountDetailsPage {
         this.accountPinInput = new JPasswordField();
         this.confirmAccountPinLabel = formattedLabel("Confirm your pin:", 15);
         this.confirmAccountPinInput = new JPasswordField();
+        this.errMsg = formattedLabel("", 13);
         this.exitBtn = formattedButton("Exit", null);
         this.prevBtn = formattedButton("Back", null);
         this.submitBtn = formattedButton("Sign Up", null);
@@ -89,6 +91,11 @@ public class AccountDetailsPage {
 
         confirmAccountPinInput.setBounds(100, 450, 400, 30);
         accountDetailsPanel.add(confirmAccountPinInput);
+
+        // Error message
+        errMsg.setBackground(Color.RED);
+        errMsg.setBounds(100, 490, 200, 15);
+        accountDetailsPanel.add(errMsg);
 
         // Exit button
         exitBtn.setBounds(100, 570, 80, 40);
@@ -177,6 +184,10 @@ public class AccountDetailsPage {
         return this.sortCode;
     }
 
+    public JLabel getErrMsgLabel() {
+        return this.errMsg;
+    }
+
     public void setAccountName(String newAcountName) {
         this.accountName = newAcountName;
     }
@@ -197,7 +208,7 @@ public class AccountDetailsPage {
         if(accountPinInput.getPassword() == confirmAccountPinInput.getPassword()) {
             return true;
         } else {
-            confirmAccountPinInput.setText("Pins do not match!");
+            errMsg.setText("Pins do not match!");
             return false;
         }
     }
