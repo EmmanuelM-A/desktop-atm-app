@@ -17,6 +17,7 @@ public class GoToSignUpAction implements ActionListener {
         SignInFrame.instance.dispose();
 
         new SignUpFrame(new Point(xLocation, yLocation));
+        SignUpFrame.instance.setVisible(true);
     }
     
 }

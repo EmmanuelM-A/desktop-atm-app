@@ -17,14 +17,16 @@ public class SignInFrame extends JFrame {
         setTitle("A.E.M.A");
         setSize(600, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        if(location != null) {
+            setLocation(location);
+        } else {
+            setLocationRelativeTo(null);
+        }
 
         this.login = new SignInPanel();
         add(login.getLoginPanel());
 
         setVisible(true);
-
-        if(location != null) setLocation(location);
 
         instance = this;
     }

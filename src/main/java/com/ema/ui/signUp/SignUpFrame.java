@@ -17,14 +17,12 @@ public class SignUpFrame extends JFrame {
         setTitle("A.E.M.A");
         setSize(600, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
 
         signUp = new SignUpPanel(this);
         add(signUp.getSignUpPanel());
-
-        setVisible(true);
-
         setLocation(location);
+
+        setVisible(false);
 
         instance = this;
     }
