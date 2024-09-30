@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 import com.ema.logic.account.Account;
 import com.ema.logic.signIn.SignInLogic;
+import com.ema.ui.account.OptionsFrame;
 import com.ema.ui.signIn.SignInFrame;
 
 public class SignInAction implements ActionListener {
@@ -33,7 +34,10 @@ public class SignInAction implements ActionListener {
         } else {
             feedback.setText("Login successful!");
             System.out.println("Login Successful!");
-            System.out.println(userAccount.getAccountName() + " - " + userAccount.getAccountNo() + " - " + userAccount.getAccountPin() + " - " + userAccount.getAccountType() + " - " + userAccount.getSortCode() + " - " + userAccount.getBalance());
+
+            SignInFrame.instance.dispose();
+
+            new OptionsFrame();
         }
     }
 }
