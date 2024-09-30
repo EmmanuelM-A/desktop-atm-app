@@ -3,9 +3,6 @@ package com.ema.actions;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
 import com.ema.logic.signUp.SignUpLogic;
 import com.ema.ui.signUp.AccountDetailsPage;
 import com.ema.ui.signUp.PersonalDetialsPage;

@@ -1,5 +1,7 @@
 package com.ema.ui.signIn;
 
+import java.awt.Point;
+
 import javax.swing.*;
 
 public class SignInFrame extends JFrame {
@@ -7,20 +9,22 @@ public class SignInFrame extends JFrame {
 
     public static SignInFrame instance;
 
-    public SignInFrame() {
-        createAndShowGUI();
+    public SignInFrame(Point location) {
+        createAndShowGUI(location);
     }
 
-    public void createAndShowGUI() {
-        super.setTitle("A.E.M.A");
-        super.setSize(600, 650);
-        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        super.setLocationRelativeTo(null);
+    public void createAndShowGUI(Point location) {
+        setTitle("A.E.M.A");
+        setSize(600, 650);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         this.login = new SignInPanel();
-        super.add(login.getLoginPanel());
+        add(login.getLoginPanel());
 
-        super.setVisible(true);
+        setVisible(true);
+
+        if(location != null) setLocation(location);
 
         instance = this;
     }

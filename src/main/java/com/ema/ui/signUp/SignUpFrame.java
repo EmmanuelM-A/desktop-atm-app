@@ -1,5 +1,7 @@
 package com.ema.ui.signUp;
 
+import java.awt.Point;
+
 import javax.swing.JFrame;
 
 public class SignUpFrame extends JFrame {
@@ -7,11 +9,11 @@ public class SignUpFrame extends JFrame {
 
     public static SignUpFrame instance;
 
-    public SignUpFrame() {
-        createAndShowGUI();
+    public SignUpFrame(Point location) {
+        createAndShowGUI(location);
     }
 
-    public void createAndShowGUI() {
+    public void createAndShowGUI(Point location) {
         setTitle("A.E.M.A");
         setSize(600, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,6 +23,8 @@ public class SignUpFrame extends JFrame {
         add(signUp.getSignUpPanel());
 
         setVisible(true);
+
+        setLocation(location);
 
         instance = this;
     }

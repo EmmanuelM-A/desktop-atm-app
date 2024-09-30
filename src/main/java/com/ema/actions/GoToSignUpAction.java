@@ -1,5 +1,6 @@
 package com.ema.actions;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,9 +11,12 @@ public class GoToSignUpAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        int xLocation = SignInFrame.instance.getX() + (SignInFrame.instance.getWidth() - 600) / 2;
+        int yLocation = SignInFrame.instance.getY() + (SignInFrame.instance.getHeight() - 700) / 2;
+
         SignInFrame.instance.dispose();
 
-        SignUpFrame.instance = new SignUpFrame();
+        new SignUpFrame(new Point(xLocation, yLocation));
     }
     
 }

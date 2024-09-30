@@ -12,7 +12,7 @@ public class ATM
 {
     public static void main( String[] args )
     {
-        new SignInFrame();
+        new SignInFrame(null);
 
         //new OptionsFrame();
     }

@@ -1,5 +1,6 @@
 package com.ema.actions;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +20,7 @@ public class GoToSignInAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Display confirmation box
         int response = JOptionPane.showConfirmDialog(
-            null,
+            currentFrame,
             "Do you want to proceed?",
             "Confirmation",
             JOptionPane.YES_NO_OPTION,
@@ -28,11 +29,15 @@ public class GoToSignInAction implements ActionListener {
 
         // Check if user has confirmed YES
         if(response == JOptionPane.YES_OPTION) {
+            // Calcaluate the new loaction of the SignInFrame
+            int xLocation = currentFrame.getX() + (currentFrame.getWidth() - 600) / 2;
+            int yLocation = currentFrame.getY() + (currentFrame.getHeight() - 700) / 2;
+
             // Dispose of the current frame displayed
             currentFrame.dispose();
 
             // Open sign in screen
-            SignInFrame.instance = new SignInFrame();
+            new SignInFrame(new Point(xLocation, yLocation));
         }
     }
     
