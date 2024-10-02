@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import com.ema.actions.GoToPage;
+import com.ema.actions.WithdrawalAction;
 import com.ema.ui.atm.OptionsPanel;
 import com.ema.ui.atm.options.base.SelectAmountPage;
 
@@ -30,7 +31,7 @@ public class WithdrawPage {
             withdrawPanel, 
             "Select an amount to withdrawal or select other for more options.", 
             new String[]{"5", "10", "20", "50", "100", "200", "500", "Other"}, 
-            new ActionListener[]{null, null, null, null, null, null, null, new GoToPage(OptionsPanel.WITHDRAW_PAGE_ALT)}
+            new ActionListener[]{new WithdrawalAction(5.0), null, null, null, null, null, null, new GoToPage(OptionsPanel.WITHDRAW_PAGE_ALT)}
         );
     }
 
@@ -42,7 +43,7 @@ public class WithdrawPage {
         return this.selectAmountPage.getOptionBtns();
     }
 
-    public JButton getExitBtn() {
-        return this.selectAmountPage.getExitBtn();
+    public JButton getGoBackBtn() {
+        return this.selectAmountPage.getGoBackBtn();
     }
 }

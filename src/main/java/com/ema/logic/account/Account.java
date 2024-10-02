@@ -39,6 +39,12 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
      */
     private double balance;
 
+    public static Account instance;
+
+    private final static String WITHDRAW_DESCRIPTION = "Money withdrawn from your account.";
+
+    private final static String DEPOSIT_DESCRIPTION = "Money deposited into your account.";
+
     /**
      * Creates an account instance that stores the user's account details for future use.
      * @param accountNo The account number inputted in by the user.
@@ -51,6 +57,8 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
         this.accountType = accountType;
         this.accountPin = accountPin;
         this.balance = balance;
+
+        instance = this;
     }
 
     public String getAccountNo() {
@@ -338,9 +346,28 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
                 return false;
             }
 
+            // Add transaction to the transaction table
+            Transaction withdawTransaction = new Transaction(
+                this.accountName, 
+                this.accountNo, 
+                this.sortCode, 
+                Transaction.WITHDRAWAL, 
+                amount, 
+                this.balance, 
+                WITHDRAW_DESCRIPTION, 
+                null, 
+                null, 
+                null
+            );
+            if(withdawTransaction.insertTransaction(connection) == false) {
+                connection.rollback();
+                System.err.println("Transaction History insert unsuccessful!");
+                return false;
+            }
+
             // Commit the transaction
             connection.commit();
-            System.out.println("Withdraw successful!");
+            System.out.println("£" + amount + " withdrawn successful!");
 
             // Update the running instance balance
             setBalance(getBalance() - amount);

@@ -30,6 +30,7 @@ public class OtherPage {
             "Input the amount you wish to witdrawal.",
             OptionsPanel.WITHDRAW_PAGE
         );
+
     }
 
     public JPanel getOtherPage() {

@@ -19,7 +19,7 @@ public class SelectAmountPage {
     /**
      * The exit button used to exit to the Sign In page.
      */
-    private JButton exitBtn;
+    private JButton goBackBtn;
 
     /**
      * The maximum number of options to be displayed on the page panel.
@@ -55,7 +55,7 @@ public class SelectAmountPage {
         }
 
         // Instantiate the exit button
-        this.exitBtn = formatedButton("Exit", new GoToPage(OptionsPanel.OPTIONS_PAGE));
+        this.goBackBtn = formatedButton("Go Back", new GoToPage(OptionsPanel.OPTIONS_PAGE));
 
         // Position the components on the page panel
         pageHeader.setBounds(350, 30, 200, 60);
@@ -69,7 +69,7 @@ public class SelectAmountPage {
         optionBtns[6].setBounds(660, 340, BUTTON_WIDTH, BUTTON_HEIGHT);
         optionBtns[7].setBounds(660, 450, BUTTON_WIDTH, BUTTON_HEIGHT);
 
-        exitBtn.setBounds(50, 570, 100, 50);
+        goBackBtn.setBounds(50, 570, 100, 50);
 
         pagePanel.add(pageHeader);
         pagePanel.add(optionBtns[0]);
@@ -82,15 +82,15 @@ public class SelectAmountPage {
         pagePanel.add(optionBtns[6]);
         pagePanel.add(optionBtns[7]);
 
-        pagePanel.add(exitBtn);
+        pagePanel.add(goBackBtn);
     }
 
     public JButton[] getOptionBtns() {
         return this.optionBtns;
     }
 
-    public JButton getExitBtn() {
-        return this.exitBtn;
+    public JButton getGoBackBtn() {
+        return this.goBackBtn;
     }
 
     protected JLabel formatPageHeader(String title) {
