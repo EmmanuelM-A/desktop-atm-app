@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 import com.ema.logic.account.Account;
 import com.ema.logic.signIn.SignInLogic;
-import com.ema.ui.account.OptionsFrame;
+import com.ema.ui.atm.OptionsFrame;
 import com.ema.ui.signIn.SignInFrame;
 
 public class SignInAction implements ActionListener {

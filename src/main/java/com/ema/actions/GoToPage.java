@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import com.ema.ui.account.OptionsPanel;
+import com.ema.ui.atm.OptionsPanel;
 
 public class GoToPage implements ActionListener {
 

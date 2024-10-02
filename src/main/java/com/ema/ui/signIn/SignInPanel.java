@@ -2,7 +2,7 @@ package com.ema.ui.signIn;
 
 import javax.swing.*;
 
-import com.ema.actions.GoToSignUpAction;
+import com.ema.actions.GoToSignUp;
 import com.ema.actions.SignInAction;
 
 import java.awt.*;
@@ -59,7 +59,7 @@ public class SignInPanel {
         loginPanel.add(feedback);
 
         registerBtn.setBounds(200, 500, 200, 50);
-        registerBtn.addActionListener(new GoToSignUpAction());
+        registerBtn.addActionListener(new GoToSignUp());
         loginPanel.add(registerBtn);
     }
 
