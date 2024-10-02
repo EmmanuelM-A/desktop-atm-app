@@ -1,4 +1,4 @@
-package com.ema.ui.account.options.deposit;
+package com.ema.ui.atm.options.deposit;
 
 import java.awt.Color;
 import java.awt.Dimension;

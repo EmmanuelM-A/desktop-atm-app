@@ -1,18 +1,20 @@
-package com.ema.ui.account;
+package com.ema.ui.atm;
 
 import java.awt.CardLayout;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.ema.ui.account.options.OptionsPage;
-import com.ema.ui.account.options.account.AccountPage;
-import com.ema.ui.account.options.balance.CheckBalancePage;
-import com.ema.ui.account.options.deposit.DepositPage;
-import com.ema.ui.account.options.payment.PaymentPage;
-import com.ema.ui.account.options.pin.ChangePinPage;
-import com.ema.ui.account.options.transactions.TransactionsPage;
-import com.ema.ui.account.options.transfer.TransferPage;
-import com.ema.ui.account.options.withdraw.OtherPage;
-import com.ema.ui.account.options.withdraw.WithdrawPage;
+import com.ema.ui.atm.options.OptionsPage;
+import com.ema.ui.atm.options.account.AccountPage;
+import com.ema.ui.atm.options.balance.CheckBalancePage;
+import com.ema.ui.atm.options.deposit.DepositPage;
+import com.ema.ui.atm.options.payment.PaymentPage;
+import com.ema.ui.atm.options.pin.ChangePinPage;
+import com.ema.ui.atm.options.transactions.TransactionsPage;
+import com.ema.ui.atm.options.transfer.TransferPage;
+import com.ema.ui.atm.options.withdraw.OtherPage;
+import com.ema.ui.atm.options.withdraw.WithdrawPage;
 
 /**
  * This class holds and displays all the option panels and their corresponding child panels.
@@ -98,12 +100,12 @@ public class OptionsPanel {
      * The constructor setups the UI with the options page as default and different pages
      * as alternatives accessed via buttons. The pages are managed and displayed using the CardLayout layout. 
      */
-    public OptionsPanel() {
+    public OptionsPanel(JFrame frame) {
         this.cardLayout = new CardLayout();
         this.optionsPanel = new JPanel(cardLayout);
         
         // Initialise the pages
-        this.optionsPage = new OptionsPage();
+        this.optionsPage = new OptionsPage(frame);
         this.withdrawPage = new WithdrawPage();
         this.depositPage = new DepositPage();
         this.paymentPage = new PaymentPage();

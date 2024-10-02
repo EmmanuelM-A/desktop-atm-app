@@ -1,4 +1,4 @@
-package com.ema.ui.account.options.balance;
+package com.ema.ui.atm.options.balance;
 
 import java.awt.Color;
 import java.awt.Dimension;

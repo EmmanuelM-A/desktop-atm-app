@@ -1,4 +1,4 @@
-package com.ema.ui.account;
+package com.ema.ui.atm;
 
 import javax.swing.JFrame;
 
@@ -17,7 +17,7 @@ public class OptionsFrame extends JFrame {
         keyPadPanel.getKeyPadPanel().setBounds(0, 0, 500, 700);
         add(keyPadPanel.getKeyPadPanel());
 
-        OptionsPanel optionsPanel = new OptionsPanel();
+        OptionsPanel optionsPanel = new OptionsPanel(this);
         optionsPanel.getOptionsPanel().setBounds(500, 0, 900, 700);
         add(optionsPanel.getOptionsPanel());
 

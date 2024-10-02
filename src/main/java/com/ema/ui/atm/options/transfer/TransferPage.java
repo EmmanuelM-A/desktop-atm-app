@@ -1,4 +1,4 @@
-package com.ema.ui.account.options.transfer;
+package com.ema.ui.atm.options.transfer;
 
 import java.awt.Color;
 import java.awt.Dimension;

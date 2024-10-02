@@ -1,4 +1,4 @@
-package com.ema.ui.account.options.withdraw;
+package com.ema.ui.atm.options.withdraw;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,8 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.ema.ui.account.OptionsPanel;
-import com.ema.ui.account.options.base.InputAmountPage;
+import com.ema.ui.atm.OptionsPanel;
+import com.ema.ui.atm.options.base.InputAmountPage;
 
 public class OtherPage {
     private JPanel otherPanel;

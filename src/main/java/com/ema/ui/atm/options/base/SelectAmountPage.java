@@ -1,4 +1,4 @@
-package com.ema.ui.account.options.base;
+package com.ema.ui.atm.options.base;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.ema.actions.GoToPage;
-import com.ema.ui.account.OptionsPanel;
+import com.ema.ui.atm.OptionsPanel;
 
 public class SelectAmountPage {
     /**

@@ -1,4 +1,4 @@
-package com.ema.ui.account.options;
+package com.ema.ui.atm.options;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,11 +6,13 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.ema.actions.GoToPage;
-import com.ema.ui.account.OptionsPanel;
+import com.ema.actions.GoToSignIn;
+import com.ema.ui.atm.OptionsPanel;
 
 /**
  * Holds and displays all the different ATM account option buttons.
@@ -74,7 +76,7 @@ public class OptionsPage {
     /**
      * The constructor instantiates all child components and assigns thier postions on the panel using absolute positioning.
      */
-    public OptionsPage() {
+    public OptionsPage(JFrame frame) {
         this.optionsPanel = new JPanel();
         
         // Instantiate components
@@ -87,7 +89,7 @@ public class OptionsPage {
         this.transactionsBtn = formattedButton("Transaction History", 13, new GoToPage(OptionsPanel.TRANSACTION_PAGE));
         this.changePinBtn = formattedButton("Change Pin", 13, new GoToPage(OptionsPanel.CHANGE_PIN_PAGE));
         this.viewAccountBtn = formattedButton("View Account", 13, new GoToPage(OptionsPanel.ACCOUNT_PAGE));
-        this.exitBtn = formattedButton("Exit", 13, null);
+        this.exitBtn = formattedButton("Exit", 13, new GoToSignIn(frame));
         
         optionsPanel.setLayout(null);
         optionsPanel.setPreferredSize(new Dimension(900, 700));

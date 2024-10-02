@@ -2,7 +2,7 @@ package com.ema.ui.signUp;
 
 import javax.swing.*;
 
-import com.ema.actions.GoToSignInAction;
+import com.ema.actions.GoToSignIn;
 import com.ema.actions.SignUpAction;
 
 import java.awt.*;
@@ -99,7 +99,7 @@ public class AccountDetailsPage {
 
         // Exit button
         exitBtn.setBounds(100, 570, 80, 40);
-        exitBtn.addActionListener(new GoToSignInAction(frame));
+        exitBtn.addActionListener(new GoToSignIn(frame));
         accountDetailsPanel.add(exitBtn);
 
         // Previous button

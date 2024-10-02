@@ -9,10 +9,10 @@ import javax.swing.JOptionPane;
 
 import com.ema.ui.signIn.SignInFrame;
 
-public class GoToSignInAction implements ActionListener {
+public class GoToSignIn implements ActionListener {
     private JFrame currentFrame;
 
-    public GoToSignInAction(JFrame currentFrame) {
+    public GoToSignIn(JFrame currentFrame) {
         this.currentFrame = currentFrame;
     }
 

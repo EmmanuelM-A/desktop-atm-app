@@ -1,4 +1,4 @@
-package com.ema.ui.account.options.pin;
+package com.ema.ui.atm.options.pin;
 
 import java.awt.Color;
 import java.awt.Dimension;
