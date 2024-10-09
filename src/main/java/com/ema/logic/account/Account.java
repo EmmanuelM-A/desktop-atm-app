@@ -254,12 +254,13 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
 
     @Override
     public boolean deposit(double amount) {
-        // Instantiate SQL variables
         Connection connection = null;
-        PreparedStatement statement = null;
+        PreparedStatement dStatement = null;
+        PreparedStatement tStatement = null;
 
         // Query to deposit money into the user's account balance
-        String query = "UPDATE Account SET balance = balance + ? WHERE account_name = ? AND account_number = ? AND sort_code = ?";
+        String dQuery = "UPDATE Account SET balance = balance + ? WHERE account_name = ? AND account_number = ? AND sort_code = ?";
+        String tQuery = "INSERT INTO Transactions (account_name, account_number, sort_code, transaction_type, amount, new_balance, date_time) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             // Esatblish the connection to the database
@@ -267,27 +268,42 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
             connection.setAutoCommit(false);
             connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
-            // Prepare the deposit statement
-            statement = connection.prepareStatement(query);
-            statement.setDouble(1, amount);
-            statement.setString(2, this.accountName);
-            statement.setString(3, this.accountNo);
-            statement.setString(4, this.sortCode);
+            // Deposit the amount
+            dStatement = connection.prepareStatement(dQuery);
+            dStatement.setDouble(1, amount);
+            dStatement.setString(2, this.accountName);
+            dStatement.setString(3, this.accountNo);
+            dStatement.setString(4, this.sortCode);
 
-            // Execute the query and check for fail
-            int rows = statement.executeUpdate();
-            if (rows == 0) {
+            int rowsUpdated = dStatement.executeUpdate();
+            if (rowsUpdated == 0) {
                 connection.rollback();
                 System.err.println("Deposit failed!");
                 return false;
             }
 
+            // Log transaction
+            tStatement = connection.prepareStatement(tQuery);
+            tStatement.setString(1, this.accountName);
+            tStatement.setString(2, this.accountNo);
+            tStatement.setString(3, this.sortCode);
+            tStatement.setString(4, Transaction.DEPOSIT);
+            tStatement.setDouble(5, amount);
+            tStatement.setDouble(6, this.balance + amount);
+            tStatement.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
+
+            int rowsInserted = tStatement.executeUpdate();
+
+            if(rowsInserted == 0) {
+                connection.rollback();
+                System.err.println("Transaction log insert failed!");
+                return false;
+            }
+
             // Commit the transaction
             connection.commit();
-            System.out.println("Deposit successful!");
-
-            // Update the running instance balance
             setBalance(getBalance() + amount);
+            System.out.println("£" + amount + " deposited successfully!");
             
             return true;
         } catch (SQLException e) {
@@ -298,11 +314,12 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
                     ex.printStackTrace();
                 }
             }
-            e.printStackTrace();
+            System.err.println("Error during withdrawal: " + e.getMessage());
             return false;
         } finally {
             try {
-                if (statement != null) statement.close();
+                if (dStatement != null) dStatement.close();
+                if (tStatement != null) tStatement.close();
                 if (connection != null) connection.close();
                 System.out.println("Connection closed - Deposit!");
             } catch (SQLException ex) {
