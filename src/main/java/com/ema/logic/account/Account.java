@@ -353,8 +353,8 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
                 this.sortCode, 
                 Transaction.WITHDRAWAL, 
                 amount, 
-                this.balance, 
-                WITHDRAW_DESCRIPTION, 
+                (this.balance - amount), 
+                null, 
                 null, 
                 null, 
                 null

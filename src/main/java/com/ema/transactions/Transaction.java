@@ -115,10 +115,29 @@ public class Transaction extends TransactionService {
             statement.setDouble(5, this.amount);
             statement.setDouble(6, this.newBalance);
             statement.setTimestamp(7, this.dateTime);
-            statement.setString(8, this.description);
-            statement.setString(9, this.targetAccountName);
-            statement.setString(10, this.targetAccountNo);
-            statement.setString(11, this.targetSortCode);
+            if (this.description != null) {
+                statement.setString(8, this.description);
+            } else {
+                statement.setNull(8, java.sql.Types.VARCHAR);
+            }
+            
+            if (this.targetAccountName != null) {
+                statement.setString(9, this.targetAccountName);
+            } else {
+                statement.setNull(9, java.sql.Types.VARCHAR);
+            }
+            
+            if (this.targetAccountNo != null) {
+                statement.setString(10, this.targetAccountNo);
+            } else {
+                statement.setNull(10, java.sql.Types.VARCHAR);
+            }
+            
+            if (this.targetSortCode != null) {
+                statement.setString(11, this.targetSortCode);
+            } else {
+                statement.setNull(11, java.sql.Types.VARCHAR);
+            }
 
             // Execute the updateTime
             int rowsInserted = statement.executeUpdate();
@@ -151,4 +170,24 @@ public class Transaction extends TransactionService {
             }
         }
     }
+    
+    /*public static void main(String[] args) {
+        double amount = 2.0;
+        Transaction transaction = new Transaction(
+            "Example User",
+            "65491137" ,
+            "735199",
+            WITHDRAWAL,
+            amount, 
+            3.0,
+            null,
+            null,
+            null,
+            null
+            );
+
+        
+        
+        transaction.insertTransaction(null)
+    }*/
 }
