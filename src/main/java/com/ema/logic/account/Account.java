@@ -3,6 +3,7 @@ package com.ema.logic.account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import com.ema.database.DatabaseHandler;
 import com.ema.transactions.Transaction;
@@ -312,12 +313,12 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
 
     @Override
     public boolean withdraw(double amount) {
-        // Instantiate SQL variables
         Connection connection = null;
-        PreparedStatement statement = null;
+        PreparedStatement wStatement = null;
+        PreparedStatement tStatement = null;
 
-        // Query to withdraw the provided amount from the user's account balance
-        String query = "UPDATE Account SET balance = balance - ? WHERE account_name = ? AND account_number = ? AND sort_code = ?";
+        String wQuery = "UPDATE Account SET balance = balance - ? WHERE account_name = ? AND account_number = ? AND sort_code = ?";
+        String tQuery = "INSERT INTO Transactions (account_name, account_number, sort_code, transaction_type, amount, new_balance, date_time) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             // Establish the connection ot the database
@@ -331,48 +332,45 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
                 return false;
             }
 
-            // Prepare the withdraw statement
-            statement = connection.prepareStatement(query);
-            statement.setDouble(1, amount);
-            statement.setString(2, this.accountName);
-            statement.setString(3, this.accountNo);
-            statement.setString(4, this.sortCode);
+            // Withdraw the amount
+            wStatement = connection.prepareStatement(wQuery);
+            wStatement.setDouble(1, amount);
+            wStatement.setString(2, this.accountName);
+            wStatement.setString(3, this.accountNo);
+            wStatement.setString(4, this.sortCode);
 
-            // Execute the query and check for fail
-            int rows = statement.executeUpdate();
-            if (rows == 0) {
+            int rowsUpdated = wStatement.executeUpdate();
+            if (rowsUpdated == 0) {
                 connection.rollback();
                 System.err.println("Withdraw failed!");
                 return false;
             }
 
-            // Add transaction to the transaction table
-            Transaction withdawTransaction = new Transaction(
-                this.accountName, 
-                this.accountNo, 
-                this.sortCode, 
-                Transaction.WITHDRAWAL, 
-                amount, 
-                (this.balance - amount), 
-                null, 
-                null, 
-                null, 
-                null
-            );
-            if(withdawTransaction.insertTransaction(connection) == false) {
+            // Log transaction
+            tStatement = connection.prepareStatement(tQuery);
+            tStatement.setString(1, this.accountName);
+            tStatement.setString(2, this.accountNo);
+            tStatement.setString(3, this.sortCode);
+            tStatement.setString(4, Transaction.WITHDRAWAL);
+            tStatement.setDouble(5, amount);
+            tStatement.setDouble(6, this.balance - amount);
+            tStatement.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
+
+            int rowsInserted = tStatement.executeUpdate();
+
+            if(rowsInserted == 0) {
                 connection.rollback();
-                System.err.println("Transaction History insert unsuccessful!");
+                System.err.println("Transaction log insert failed!");
                 return false;
             }
 
             // Commit the transaction
             connection.commit();
-            System.out.println("£" + amount + " withdrawn successful!");
-
-            // Update the running instance balance
             setBalance(getBalance() - amount);
+            System.out.println("£" + amount + " withdrawn successfully!");
 
             return true;
+
         } catch (SQLException e) {
             if (connection != null) {
                 try {
@@ -381,11 +379,12 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
                     ex.printStackTrace();
                 }
             }
-            e.printStackTrace();
+            System.err.println("Error during withdrawal: " + e.getMessage());
             return false;
         } finally {
             try {
-                if (statement != null) statement.close();
+                if (wStatement != null) wStatement.close();
+                if (tStatement != null) tStatement.close();
                 if (connection != null) connection.close();
                 System.out.println("Connection closed - Withdraw!");
             } catch (SQLException ex) {

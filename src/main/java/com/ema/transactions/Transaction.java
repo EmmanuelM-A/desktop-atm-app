@@ -170,24 +170,4 @@ public class Transaction extends TransactionService {
             }
         }
     }
-    
-    /*public static void main(String[] args) {
-        double amount = 2.0;
-        Transaction transaction = new Transaction(
-            "Example User",
-            "65491137" ,
-            "735199",
-            WITHDRAWAL,
-            amount, 
-            3.0,
-            null,
-            null,
-            null,
-            null
-            );
-
-        
-        
-        transaction.insertTransaction(null)
-    }*/
 }
