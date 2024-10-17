@@ -8,9 +8,8 @@ import java.sql.Timestamp;
 import com.ema.database.DatabaseHandler;
 import com.ema.transactions.Transaction;
 import com.ema.transactions.services.*;
-import com.mysql.cj.xdevapi.PreparableStatement;
 
-public class Account implements Withdrawalable, Depositable, Tranaferable, Payable {
+public class Account implements /*Withdrawalable, Depositable, Tranaferable, Payable*/ {
     /**
      * The user's account number.
      */
@@ -41,11 +40,10 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
      */
     private double balance;
 
+    private DepositService depositService;
+
+
     public static Account instance;
-
-    private final static String WITHDRAW_DESCRIPTION = "Money withdrawn from your account.";
-
-    private final static String DEPOSIT_DESCRIPTION = "Money deposited into your account.";
 
     /**
      * Creates an account instance that stores the user's account details for future use.
@@ -59,6 +57,8 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
         this.accountType = accountType;
         this.accountPin = accountPin;
         this.balance = balance;
+
+        this.depositService = new DepositService();
 
         instance = this;
     }
