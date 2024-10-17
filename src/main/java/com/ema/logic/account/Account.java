@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import com.ema.database.DatabaseHandler;
 import com.ema.transactions.Transaction;
 import com.ema.transactions.services.*;
+import com.mysql.cj.xdevapi.PreparableStatement;
 
 public class Account implements Withdrawalable, Depositable, Tranaferable, Payable {
     /**
@@ -169,16 +170,18 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
     }
 
     @Override
-    public boolean transfer(String accountName, String accountNo, String sortCode, double amount) {
+    public boolean transfer(String accountName, String accountNo, String sortCode, double amount, String description) {
         // Instantiate SQL variables
         Connection connection = null;
         PreparedStatement withdraw = null;
         PreparedStatement deposit = null;
+        PreparedStatement logTransaction = null;
 
-        // Withdraw the amount from your account
+        // Query to withdraw money from your account and deposit it into the target account
         String wQuery = "UPDATE account SET balance = balance - ? WHERE account_name = ? AND account_number = ? AND sort_code = ? AND balance >= ?";
-        // Deposit the amount into the target account
         String dQuery = "UPDATE account SET balance = balance + ? WHERE account_name = ? AND account_number = ? AND sort_code = ?";
+
+        String logTranscQuery = "INSERT INTO Transactions (account_name, account_number, sort_code, transaction_type, amount, new_balance, date_time, description, target_account_name, target_account_number, target_sort_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             // Establish the connection to the database
@@ -192,7 +195,7 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
                 return false;
             }
 
-            // Prepare the withdraw statment
+            // Withdraw the amount
             withdraw = connection.prepareStatement(wQuery);
             withdraw.setDouble(1, amount);
             withdraw.setString(2, this.accountName);
@@ -200,35 +203,54 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
             withdraw.setString(4, this.sortCode);
             withdraw.setDouble(5, amount);
 
-            // Set the user's running instance balance
-            setBalance(getBalance() - amount);
-
-            // Execute query and check for fail
-            int withdrawRows = withdraw.executeUpdate();
+            int withdrawRows = withdraw.executeUpdate(); // Check for fail
             if (withdrawRows == 0) {
                 connection.rollback();
                 System.err.println("Transfer failed, insufficient funds in your account.");
                 return false;
             }
 
-            // Prepare the deposit statement
+            setBalance(getBalance() - amount);
+
+            // Deposit amount into target account
             deposit = connection.prepareStatement(dQuery);
             deposit.setDouble(1, amount);
             deposit.setString(2, accountName);
             deposit.setString(3, accountNo);
             deposit.setString(4, sortCode);
 
-            // Execute query and check for fail
-            int depositRows = deposit.executeUpdate();
+            int depositRows = deposit.executeUpdate(); // Check for fail
             if (depositRows == 0) {
                 connection.rollback();
                 System.err.println("Transfer failed, destination account does not exist.");
                 return false;
             }
 
+            // Log transfer transaction
+            logTransaction = connection.prepareStatement(logTranscQuery);
+            logTransaction.setString(1, this.accountName);
+            logTransaction.setString(2, this.accountNo);
+            logTransaction.setString(3, this.sortCode);
+            logTransaction.setString(4, Transaction.TRANSFER);
+            logTransaction.setDouble(5, amount);
+            logTransaction.setDouble(6, getBalance());
+            logTransaction.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
+            logTransaction.setString(8, description != null ? description : "No description");
+            logTransaction.setString(9, accountName);
+            logTransaction.setString(10, accountNo);
+            logTransaction.setString(11, sortCode);
+
+            int rowsInserted = logTransaction.executeUpdate();
+            if(rowsInserted == 0) {
+                connection.rollback();
+                System.err.println("Transaction log insert failed!");
+                return false;
+            }
+
             // Commit transaction
             connection.commit();
-            System.out.println("Transfer successful!");
+            System.out.println("£" + amount +" transferred successfully!");
+
             return true;
         } catch (SQLException e) {
             if (connection != null) {
@@ -244,6 +266,7 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
             try {
                 if (withdraw != null) withdraw.close();
                 if (deposit != null) deposit.close();
+                if (logTransaction != null) logTransaction.close();
                 if (connection != null) connection.close();
                 System.out.println("Connection closed! - Transfer");
             } catch (SQLException ex) {
@@ -282,7 +305,7 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
                 return false;
             }
 
-            // Log transaction
+            // Log deposit transaction
             tStatement = connection.prepareStatement(tQuery);
             tStatement.setString(1, this.accountName);
             tStatement.setString(2, this.accountNo);
@@ -408,6 +431,12 @@ public class Account implements Withdrawalable, Depositable, Tranaferable, Payab
                 ex.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Account test = new Account("65491137", "735199", "Example User", "Checking", "1234", 105.00);
+
+        test.transfer("Jane Doe", "57040970", "707289", 15.00, "Bus Fee");
     }
 
 }

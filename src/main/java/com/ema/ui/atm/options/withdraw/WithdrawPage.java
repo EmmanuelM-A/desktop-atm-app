@@ -32,7 +32,7 @@ public class WithdrawPage {
             withdrawPanel, 
             "Select an amount to withdrawal or select other for more options.", 
             new String[]{"5", "10", "20", "50", "100", "200", "500", "Other"}, 
-            new ActionListener[]{new WithdrawalAction(5.0), new DepositAction(10.0), null, null, null, null, null, new GoToPage(OptionsPanel.WITHDRAW_PAGE_ALT)}
+            new ActionListener[]{new WithdrawalAction(5.0), null, null, null, null, null, null, new GoToPage(OptionsPanel.WITHDRAW_PAGE_ALT)}
         );
     }
 
