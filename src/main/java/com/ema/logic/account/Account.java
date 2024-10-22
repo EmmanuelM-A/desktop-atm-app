@@ -33,18 +33,29 @@ public class Account {
      */
     private double balance;
 
-    private DepositService depositService;
-    private WithdrawService withdrawService;
-    private PaymentService paymentService;
-    private TransferService transferService;
+    /**
+     * Allows the user to make deposit transactions.
+     */
+    private final DepositService depositService;
 
+    /**
+     * Allowss the user to make withdrawal transactions.
+     */
+    private final WithdrawService withdrawService;
 
+    /**
+     * Used to reference the user's accoutn during the program execution.
+     */
     public static Account instance;
 
     /**
      * Creates an account instance that stores the user's account details for future use.
      * @param accountNo The account number inputted in by the user.
      * @param sortCode The sort code inputted in by the user.
+     * @param accountName The account name associated with the user's account.
+     * @param accountType The type of account.
+     * @param accountPin The user's pin to access the account.
+     * @param balance The current balance in the users account.
      */
     public Account(String accountNo, String sortCode, String accountName, String accountType, String accountPin, double balance) {
         this.accountNo = accountNo;
@@ -92,15 +103,20 @@ public class Account {
         this.balance = newBalance;
     }
 
-
+    /**
+     * Executes a payment transaction. 
+     * @param description The payment description/The context of the payment.
+     * @param amount The amount of money being paid.
+     * @return True if the transaction was successful and false otherwise.
+     */
     public boolean pay(String description, double amount) {
-        this.paymentService = new PaymentService(description);
+        PaymentService paymentService = new PaymentService(description);
 
         return paymentService.executeTransacton(this, amount); 
     }
 
     public boolean transfer(String accountName, String accountNo, String sortCode, double amount, String description) {
-        this.transferService = new TransferService(description, accountName, accountNo, sortCode);
+        TransferService transferService = new TransferService(description, accountName, accountNo, sortCode);
 
         return transferService.executeTransacton(this, amount);
     }
@@ -114,9 +130,11 @@ public class Account {
     }
 
     public static void main(String[] args) {
-        Account test = new Account("65491137", "735199", "Example User", "Checking", "1234", 105.00);
+        Account test = new Account("65491137", "735199", "Example User", "Checking", "1234", 40.0);
 
-        test.transfer("Jane Doe", "57040970", "707289", 15.00, "Bus Fee");
+        //test.transfer("Jane Doe", "57040970", "707289", 15.00, "Bus Fee");
+
+        test.pay("Mortgage Bills", 50);
     }
 
 }

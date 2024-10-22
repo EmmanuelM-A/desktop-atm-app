@@ -69,7 +69,6 @@ public class WithdrawService implements Transaction {
             System.out.println("£" + amount + " withdrawn successfully!");
 
             return true;
-
         } catch (SQLException e) {
             if (connection != null) {
                 try {
@@ -90,6 +89,5 @@ public class WithdrawService implements Transaction {
                 ex.printStackTrace();
             }
         }
-    }
-    
+    } 
 }
