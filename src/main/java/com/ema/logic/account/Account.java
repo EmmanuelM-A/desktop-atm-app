@@ -1,5 +1,6 @@
 package com.ema.logic.account;
 
+import com.ema.logic.account.oeprations.ChangePinOperation;
 import com.ema.transactions.services.*;
 
 public class Account {
@@ -129,12 +130,32 @@ public class Account {
         return withdrawService.executeTransacton(this, amount);
     }
 
+    public boolean checkBalance() {
+        return false;
+    }
+
+    public boolean viewTransactionHistory() {
+        return false;
+    }
+
+    public boolean viewAccount() {
+        return false;
+    }
+
+    public boolean changePin(String oldPin, String newPin) {
+        ChangePinOperation changePinOperation = new ChangePinOperation(oldPin, newPin);
+
+        return changePinOperation.executeOperation(this);
+    }
+
     public static void main(String[] args) {
         Account test = new Account("65491137", "735199", "Example User", "Checking", "1234", 40.0);
 
         //test.transfer("Jane Doe", "57040970", "707289", 15.00, "Bus Fee");
 
-        test.pay("Mortgage Bills", 50);
+        //test.pay("Mortgage Bills", 50);
+
+        test.changePin("1234", "4321");
     }
 
 }
