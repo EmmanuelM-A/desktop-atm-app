@@ -1,6 +1,7 @@
 package com.ema.logic.account;
 
 import com.ema.logic.account.oeprations.ChangePinOperation;
+import com.ema.logic.account.oeprations.CheckBalanceOperation;
 import com.ema.transactions.services.*;
 
 public class Account {
@@ -44,6 +45,8 @@ public class Account {
      */
     private final WithdrawService withdrawService;
 
+    private final CheckBalanceOperation checkBalanceOperation;
+
     /**
      * Used to reference the user's accoutn during the program execution.
      */
@@ -68,6 +71,8 @@ public class Account {
 
         this.depositService = new DepositService();
         this.withdrawService = new WithdrawService();
+
+        this.checkBalanceOperation = new CheckBalanceOperation();
 
         instance = this;
     }
@@ -131,7 +136,7 @@ public class Account {
     }
 
     public boolean checkBalance() {
-        return false;
+        return checkBalanceOperation.executeOperation(this);
     }
 
     public boolean viewTransactionHistory() {
@@ -149,13 +154,15 @@ public class Account {
     }
 
     public static void main(String[] args) {
-        Account test = new Account("65491137", "735199", "Example User", "Checking", "1234", 40.0);
+        Account test = new Account("65491137", "735199", "Example User", "Checking", "4321", 40.0);
 
         //test.transfer("Jane Doe", "57040970", "707289", 15.00, "Bus Fee");
 
         //test.pay("Mortgage Bills", 50);
 
-        test.changePin("1234", "4321");
+        //test.changePin("1234", "4321");
+
+        //test.checkBalance();
     }
 
 }

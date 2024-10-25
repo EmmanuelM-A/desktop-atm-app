@@ -11,8 +11,8 @@ public class ATM
 {
     public static void main( String[] args )
     {
-        new SignInFrame(null);
+        //new SignInFrame(null);
 
-        //new OptionsFrame();
+        new OptionsFrame();
     }
 }
