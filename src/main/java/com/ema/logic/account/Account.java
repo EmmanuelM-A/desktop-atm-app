@@ -2,6 +2,7 @@ package com.ema.logic.account;
 
 import com.ema.logic.account.oeprations.ChangePinOperation;
 import com.ema.logic.account.oeprations.CheckBalanceOperation;
+import com.ema.logic.account.oeprations.ViewAccountOperation;
 import com.ema.transactions.services.*;
 
 public class Account {
@@ -47,6 +48,8 @@ public class Account {
 
     private final CheckBalanceOperation checkBalanceOperation;
 
+    private final ViewAccountOperation viewAccountOperation;
+
     /**
      * Used to reference the user's accoutn during the program execution.
      */
@@ -73,6 +76,7 @@ public class Account {
         this.withdrawService = new WithdrawService();
 
         this.checkBalanceOperation = new CheckBalanceOperation();
+        this.viewAccountOperation = new ViewAccountOperation();
 
         instance = this;
     }
@@ -144,7 +148,7 @@ public class Account {
     }
 
     public boolean viewAccount() {
-        return false;
+        return viewAccountOperation.executeOperation(this);
     }
 
     public boolean changePin(String oldPin, String newPin) {
@@ -163,6 +167,7 @@ public class Account {
         //test.changePin("1234", "4321");
 
         //test.checkBalance();
-    }
 
+        test.viewAccount();
+    }
 }
