@@ -90,6 +90,7 @@ public class ChangePinOperation implements Operation {
                 if (getOldPinStatement != null) getOldPinStatement.close();
                 if (updatePinStatement != null) updatePinStatement.close();
                 if (connection != null) connection.close();
+                System.out.println("Connection closed! - Change Pin");
             } catch (Exception e) {
                 e.printStackTrace();
             }

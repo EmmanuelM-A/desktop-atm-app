@@ -1,21 +1,20 @@
 package com.ema.logic.account.oeprations;
 
-import com.ema.logic.account.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.ema.database.DatabaseHandler;
+import com.ema.logic.account.Account;
 
-public class CheckBalanceOperation implements Operation {
-
+public class ViewTransactionHistoryOperation implements Operation {
     @Override
     public boolean executeOperation(Account account) {
         Connection connection = null;
-        PreparedStatement getBalanceStatement = null;
+        PreparedStatement transactionHistoryStatement = null;
         ResultSet resultSet = null;
 
-        String getBalanceQuery = "SELECT balance FROM Account WHERE account_name = ? AND account_number = ? AND sort_code = ?";
+        String transctionHistoryQuery = "SELECT * FROM Transactions WHERE account_name = ? AND account_number = ? AND sort_code = ?";
 
         try {
             // Establish the connection to the database
@@ -23,12 +22,12 @@ public class CheckBalanceOperation implements Operation {
             connection.setAutoCommit(false);
             connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
-            getBalanceStatement = connection.prepareStatement(getBalanceQuery);
-            getBalanceStatement.setString(1, account.getAccountName());
-            getBalanceStatement.setString(2, account.getAccountNo());
-            getBalanceStatement.setString(3, account.getSortCode());
+            transactionHistoryStatement = connection.prepareStatement(transctionHistoryQuery);
+            transactionHistoryStatement.setString(1, account.getAccountName());
+            transactionHistoryStatement.setString(2, account.getAccountNo());
+            transactionHistoryStatement.setString(3, account.getSortCode());
 
-            resultSet = getBalanceStatement.executeQuery();
+            resultSet = transactionHistoryStatement.executeQuery();
 
             if(!resultSet.next()) {
                 connection.rollback();
@@ -40,7 +39,11 @@ public class CheckBalanceOperation implements Operation {
             
             // Commit the transaction
             connection.commit();
-            System.out.println("Account Balance: " + resultSet.getInt(1));
+
+            do {
+                System.out.println("Transaction: " + resultSet.getString(5));
+            } while(resultSet.next());
+            
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,13 +58,12 @@ public class CheckBalanceOperation implements Operation {
         } finally {
             try {
                 if (resultSet != null) resultSet.close();
-                if (getBalanceStatement != null)getBalanceStatement.close();
+                if (transactionHistoryStatement != null)transactionHistoryStatement.close();
                 if (connection != null) connection.close();
-                System.out.println("Connection closed! - Check Balance");
+                System.out.println("Connection closed! - View Transaction History");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    
 }
