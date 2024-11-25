@@ -161,7 +161,7 @@ public class Account {
         return changePinOperation.executeOperation(this);
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Account test = new Account("65491137", "735199", "Example User", "Checking", "4321", 40.0);
 
         //test.transfer("Jane Doe", "57040970", "707289", 15.00, "Bus Fee");
@@ -175,5 +175,5 @@ public class Account {
         //test.viewAccount();
 
         //test.viewTransactionHistory();
-    }
+    }*/
 }
